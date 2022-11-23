@@ -7,12 +7,12 @@ import {
 
 import { styles } from './style';
 
+import { Searchbar } from 'react-native-paper';
 
 
 
 
-
-const HomeEditoras = ({route,navigation}) => {
+const HomeLivro = ({route,navigation}) => {
 
     const {id} = route.params
     
@@ -20,10 +20,9 @@ const HomeEditoras = ({route,navigation}) => {
     //Barra Pesquisa
     const [pesquisa, setPesquisa] = useState('');
     
-    function onChangeText(event:any){
+    function onChangeSearch(event:any){
     setPesquisa(event.target.value)
     }
-
 
 
     //-----------------------
@@ -31,15 +30,15 @@ const HomeEditoras = ({route,navigation}) => {
     return (
     <>
         <View>
-            <Text>Home EditoraS</Text>
+            <Text>Home Livro</Text>
             <Text>{id}</Text>
             <Text>Texto</Text>
         </View>
 
         <SafeAreaView>
-            <TextInput
-                style={styles.input}
-                onChangeText={ (e) => {onChangeText(e)}}
+            <Searchbar
+                placeholder="Search"
+                onChangeText={onChangeSearch}
                 value={pesquisa}
             />
         </SafeAreaView>
@@ -47,4 +46,4 @@ const HomeEditoras = ({route,navigation}) => {
     )
 }
 
-export default HomeEditoras;
+export default HomeLivro;

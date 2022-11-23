@@ -62,11 +62,5 @@ export const styles =  StyleSheet.create({
       alignItems: 'center',
       width: 300,
       marginTop: 20
-    },
-    loading:{
-      flex: 1,
-      backgroundColor: '#91886985',
-      justifyContent: 'center',
     }
-
 });

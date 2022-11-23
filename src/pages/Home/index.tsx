@@ -2,31 +2,18 @@ import React,{useContext, useEffect, useState} from 'react'
 
 import {
     View,
-    Text,
-    TextInput,
     TouchableOpacity,
-    Button,
     FlatList,
     SafeAreaView,
     StyleSheet,
-    StatusBar
+    StatusBar,ScrollView
 } from 'react-native';
-import Alerta from '../../components/Alert/Alerta'
+
 import AxiosInstance from '../../api/AxiosInstance';
-
-
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-
-import Login from '../Login';
-import SettingsScreen from '../Settings';
-import NavBar from '../../components/Navigation/NavBar';
 
 import { DataContext } from '../../context/DataContext';
 import { DadosEditoraType } from '../../models/DadosEditoraType';
-
-
+import { Text, Card, Button, Icon } from '@rneui/themed';
 
 
 const Item = ({ item, onPress, backgroundColor, textColor }) => (
@@ -36,12 +23,9 @@ const Item = ({ item, onPress, backgroundColor, textColor }) => (
 );
 
 
-
 const Home = ({navigation}) => {
-
  
   const {dadosUsuario} = useContext(DataContext)
-
 
   //----------------
   //Get Editoras
@@ -91,23 +75,74 @@ const Home = ({navigation}) => {
         );
   };
   //------------------------------------
+  //GRID RECENTES
+
+
+
+
+
+
+  const gridRecentes = () => {
+
+    return (
+
+      <>
+        <SafeAreaView style={styles.card}>
+        <Card>
+            <Card.Title>HELLO WORLD</Card.Title>
+            <Card.Divider />
+            <Card.Image
+              style={{ padding: 0 }}
+              source={{
+                uri:
+                  'https://awildgeographer.files.wordpress.com/2015/02/john_muir_glacier.jpg',
+              }}
+            />
+            <Text style={{ marginBottom: 10 }}>
+              The idea with React Native Elements is more about component
+              structure than actual design.
+            </Text>
+            <Button
+              icon={
+                <Icon
+                  name="code"
+                  color="#ffffff"
+                  iconStyle={{ marginRight: 10 }}
+                />
+              }
+              buttonStyle={{
+                borderRadius: 0,
+                marginLeft: 0,
+                marginRight: 0,
+                marginBottom: 0,
+                backgroundColor:'#736A4D'
+              }}
+              title="Ver Livro"
+              onPress={() =>{ 
+                navigation.navigate('HomeEditora',1)
+              }}
+            />
+          </Card>
+          </SafeAreaView>
+      </>
+      );
+  }
+
+
+
+
+  //----------------------------------
 
   return (
       <>    
-      
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Text style={{ marginBottom:10 }}>Home Screen</Text>
-        <View>
-          <Text>
-            Bem-vindo, {dadosUsuario?.nome}
-          </Text>
-        </View>
-
+   
+   <ScrollView>
         <SafeAreaView style={styles.container}>
+          <Text style={styles.title}>Editoras</Text>
           <FlatList
             data={dadosEditora}
             renderItem={renderItem}
-            keyExtractor={(dadosEditora) => dadosEditora.codigoEditora}
+            keyExtractor={(dadosEditora:any) => dadosEditora.codigoEditora}
             extraData={selectedId}
             horizontal={true}
             scrollEnabled
@@ -120,8 +155,64 @@ const Home = ({navigation}) => {
         </SafeAreaView>
 
 
-      </View>
-      
+        <SafeAreaView style={styles.container2}>
+          <Text style={styles.title}>Recentes</Text>
+          <SafeAreaView >
+            <FlatList
+              data={dadosEditora}
+              renderItem={gridRecentes}
+              keyExtractor={(dadosEditora:any) => dadosEditora.codigoEditora}
+              extraData={selectedId}
+              horizontal={true}
+              scrollEnabled
+              showsHorizontalScrollIndicator={true}
+              style={{
+                height: 400,
+                flexGrow: 0,
+                
+                
+              }}
+            />
+          </SafeAreaView>
+          
+        </SafeAreaView>
+ 
+        <SafeAreaView style={styles.container}>
+          <Text style={styles.title}>Destaque</Text>
+          <Card>
+            <Card.Title>HELLO WORLD</Card.Title>
+            <Card.Divider />
+            <Card.Image
+              style={{ padding: 0 }}
+              source={{
+                uri:
+                  'https://awildgeographer.files.wordpress.com/2015/02/john_muir_glacier.jpg',
+              }}
+            />
+            <Text style={{ marginBottom: 10 }}>
+              The idea with React Native Elements is more about component
+              structure than actual design.
+            </Text>
+            <Button
+              icon={
+                <Icon
+                  name="code"
+                  color="#ffffff"
+                  iconStyle={{ marginRight: 10 }}
+                />
+              }
+              buttonStyle={{
+                borderRadius: 0,
+                marginLeft: 0,
+                marginRight: 0,
+                marginBottom: 0,
+                backgroundColor:'#736A4D'
+              }}
+              title="Ver Livro"
+            />
+          </Card>
+        </SafeAreaView>
+        </ScrollView>
 
       </>
       );
@@ -129,10 +220,25 @@ const Home = ({navigation}) => {
 
 
 const styles = StyleSheet.create({
+  
+  header:{
+
+  },
+
   container: {
     flex: 1,
-    marginTop: StatusBar.currentHeight || 0,
+    paddingTop:20,
+    backgroundColor: '#91886985'
+   
   },
+  
+  container2: {
+    flex: 2,
+    paddingTop:20,
+    backgroundColor: '#91886985'
+   
+  },
+
   item: {
     padding: 20,
     marginVertical: 8,
@@ -140,8 +246,14 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 32,
+    paddingBottom:10,
+    paddingLeft:10
   },
-  
+  card:{
+    height:450,
+    width:250,
+    paddingLeft:10
+  }
 });
 
 
