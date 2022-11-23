@@ -39,8 +39,8 @@ const Home = ({navigation}) => {
       '/editoras',
       {headers: {"Authorization" : `Bearer ${dadosUsuario?.token}`}}
     ).then( (resultado) => {
-      console.log('Dados editoras ',JSON.stringify(resultado))
-      console.log('Dados editoras - Data ',JSON.stringify(resultado.data))
+      // console.log('Dados editoras ',JSON.stringify(resultado))
+      // console.log('Dados editoras - Data ',JSON.stringify(resultado.data))
       setDadosEditora(resultado.data)
     }).catch((error) => {
       console.log('error ao recuperar dados', JSON.stringify(error))

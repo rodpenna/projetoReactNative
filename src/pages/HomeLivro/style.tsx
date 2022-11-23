@@ -4,7 +4,7 @@ import { Dimensions, StyleSheet } from 'react-native';
 export const styles =  StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: '#f1dea2d2'
+      backgroundColor: '#91886985'
     },
     cabecalho: {
       flex: 1,
