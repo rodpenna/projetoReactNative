@@ -1,79 +1,101 @@
-
-
- import React,{useEffect, useState} from 'react';
-
- import {
-   SafeAreaView,
-   ScrollView,
-   StatusBar,
-   StyleSheet,
-   Text,
-   useColorScheme,
-   View,
-   Button
- } from 'react-native';
- 
- import {
-   Colors,
-   DebugInstructions,
-   Header,
-   LearnMoreLinks,
-   ReloadInstructions,
- } from 'react-native/Libraries/NewAppScreen';
+import React from 'react';
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import SettingsScreen from './pages/Settings'
-import Login from './pages/Login'
-import Home from './pages/Home'
 
- const Tab = createBottomTabNavigator();
- const Stack = createNativeStackNavigator();
+import { DataProvider } from './context/DataContext';
 
- const App = () => {
-   
+import Login from './pages/Login/'
+import Home from './pages/Home/'
+import HomeEditoras from './pages/HomeEditoras'
+import HomeEditora from './pages/HomeEditora';
+
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 
+
+const TabBottomNavigation = createBottomTabNavigator();
+
+const BottomNavigator = () => {
+  return (
+    <TabBottomNavigation.Navigator
+      screenOptions={{
+        headerShown:false,
+        tabBarStyle:{backgroundColor: '#99780C'},
+        tabBarActiveTintColor:'red',
+        tabBarInactiveTintColor:'blue'
+      }}
+    >
+      <TabBottomNavigation.Screen 
+        name="Home" 
+        component={Home}
+        options={{
+          title:'Home',
+          tabBarIcon: ()=> (<Ionicons name='home' color='#000' size={24}/>)
+        }}
+      />
+
+      <TabBottomNavigation.Screen 
+        name="HomeEditoras" 
+        component={HomeEditoras}
+      />
+
+    </TabBottomNavigation.Navigator>
+  )
+}
+
+
+const Stack = createNativeStackNavigator();
+const App = () => {
+  
   return (
   <>
-    <NavigationContainer>
-      {/* <Stack.Navigator>
-        <Stack.Screen name="Home" component={Home} />
-        <Stack.Screen name="Login" component={Login} />
-      </Stack.Navigator>  */}
-      
-      <Tab.Navigator initialRouteName='Home'>
-
-        <Tab.Screen 
-          name="Home" 
-          component={Home}
-  
-          options={{
-            headerShown:false
+    <DataProvider>
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName="Login"
+          screenOptions={{
+            headerTintColor: 'white',
+            headerStyle: { backgroundColor: 'tomato' },
           }}
-                    
+        >
+          <Stack.Screen 
+            name="Login" 
+            component={Login} 
+            options={{
+              title: '',
+              headerStyle: {
+                backgroundColor: '#504e2e',
+              },            
+            }}
           />
-        <Tab.Screen 
-          name="Login" 
-          component={Login}
-          options={{
-            headerShown:false
-          }}
+          <Stack.Screen
+            name="BottomNavigator" 
+            component={BottomNavigator} 
+            options={{
+              title: '',
+              headerStyle: {
+                backgroundColor: '#504e2e',
+              },
+            }}
           />
-        <Tab.Screen 
-          name="Settings" 
-          component={SettingsScreen} 
-          options={{
-            headerShown:false
-          }}
+          <Stack.Screen
+            name="HomeEditora" 
+            component={HomeEditora} 
+            options={{
+              title: '',
+              headerStyle: {
+                backgroundColor: '#504e2e',
+              },
+            }}
           />
-      </Tab.Navigator>
-    </NavigationContainer>
+        </Stack.Navigator> 
+      </NavigationContainer>
+    </DataProvider>
   </>
   );
- };
- 
+};
+
  
  
  export default App;

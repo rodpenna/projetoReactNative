@@ -4,7 +4,7 @@ import { Dimensions, StyleSheet } from 'react-native';
 export const styles =  StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: '#7054b6a7'
+      backgroundColor: '#f1dea2d2'
     },
     cabecalho: {
       flex: 1,
@@ -39,7 +39,7 @@ export const styles =  StyleSheet.create({
       marginTop:50
     },
     botao: {
-        backgroundColor: '#190152',
+        backgroundColor: '#68520a',
         width: Dimensions.get('window').width * 0.9,
         paddingVertical: 20,
         borderRadius: 10,

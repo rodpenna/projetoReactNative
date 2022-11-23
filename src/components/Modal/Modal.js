@@ -72,8 +72,7 @@ const Modal = ({ show, close }) => {
           ]
         }]}
       >
-
-      <ActivityIndicator size="large" color="#0000ff" />
+        <ActivityIndicator size="large" color="#68520a" />
 
       </Animated.View>
     </Animated.View>
@@ -114,7 +113,7 @@ const styles = StyleSheet.create({
     width: '100%',
     height: 50,
     borderRadius: 10,
-    backgroundColor: '#9b59b6',
+    backgroundColor: '#665313',
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: 30

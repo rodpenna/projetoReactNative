@@ -1,4 +1,4 @@
-import React ,{useEffect, useState} from 'react';
+import React ,{useContext, useEffect, useState} from 'react';
 
 import {
   View,
@@ -18,18 +18,21 @@ import AxiosInstance from '../../api/AxiosInstance';
 import { styles } from './style';
 
 import Modal from '../../components/Modal/Modal'
-import Modal2 from '../../components/Modal/Modal2'
+
+import { DataContext } from '../../context/DataContext';
 
 const Login = ({navigation}) => {
 
 
-  //--------MODAL ----------------
+  //----------------------------
+  //Modal
   const [modal, setModal] = useState(false)
 
-
-
   //------------------------------
+  //Contexto
 
+  const {armazenarDadosUsuario} = useContext(DataContext)
+  //------------------------------
 
 
 
@@ -39,33 +42,40 @@ const Login = ({navigation}) => {
 
   function goHome(){
 
-    // navigation.navigate('Home')
+    setModal(true)
 
     let timer1 = setTimeout(() => {
-      navigation.navigate('Home')
-  }, 3000);
+      navigation.navigate('BottomNavigator')
+  }, 2000);
   }
 
   //user1@mail.com
   //123
   const handleLogin = async () => {
+
+    var tokenJwt:any = null;
+
     try{
       const retorno = await AxiosInstance.post('/auth/login',{
         email:email,
         password:senha
       })
-      setModal(true)
+      
       if (retorno.status===200){
-        console.log('retorno :' + JSON.stringify(retorno.data))
-        // Alert.alert('Logado com sucesso')
+        
+        tokenJwt = retorno.data
+        console.log('retorno :' + JSON.stringify(tokenJwt))
+        armazenarDadosUsuario(tokenJwt['jwt-token'])
+
+
         goHome()
       }
       else{
-        
+        Alerta('Email ou Senha inválidos')
       }
       
     }catch( error){
-      
+      Alerta('Email ou Senha inválidos')
       console.log('Erro de autenticacao,'+JSON.stringify(error))
       
     }
@@ -93,12 +103,7 @@ const Login = ({navigation}) => {
               <Text onPress={handleLogin} style={styles.textoBotao}>Login</Text>
             </TouchableOpacity>
         </View>
-
-        <TouchableOpacity style={styles.button} onPress={() => setModal(true)}>
-          <Text>Open Modal</Text>
-        </TouchableOpacity>
-      
-
+     
         <Modal 
           show={modal}
           close={() => setModal(false)}
