@@ -16,27 +16,24 @@ import AxiosInstance from '../../api/AxiosInstance';
 import { Card, Button, Icon } from '@rneui/themed';
 import { DataContext } from '../../context/DataContext';
 import { DadosLivroType } from '../../models/DadosLivroType';
+import {DadosLivrosType} from '../../models/DadosLivrosType';
 
-import { retrieveLocalData } from '../../services/LocalStorageService';
-
+const Item = ({ item, onPress, backgroundColor, textColor }) => (
+  <TouchableOpacity onPress={onPress} style={[styles.item, backgroundColor]}>
+     <Image source={{uri: item.urlImagem}} resizeMode='contain' style={styles.imgItem} />    
+    <Text style={[styles.title, textColor]}>{item.nomeLivro}</Text>
+  </TouchableOpacity>
+);
 
 
 const Favorito = ({route,navigation}) => {
- 
-  //-------------------------------------------------
-  //Dados
-
   const {dadosUsuario} = useContext(DataContext);
-  
-  //-------------------------------------------------
-  //Favoritos
-
-  const [dadosFavoritos, setDadosFavoritos] = useState<DadosLivroType[]>([]);
+  const [dadosFavoritos, setDadosFavoritos] = useState<DadosLivrosType[]>([]);
+  const [selectedId, setSelectedId] = useState(null);
 
   useEffect(() => {
     getAllFavoritos();
   },[]);
-
 
   const getAllFavoritos = async () =>{
     AxiosInstance.get(
@@ -50,40 +47,55 @@ const Favorito = ({route,navigation}) => {
         })
   }
 
-
-  //---------------------------------------------------------------------
-
-
-
-
-
+  // const navigateToFavoritosHome = (id:any) =>{
+  //   setSelectedId(id);
+  //   navigation.navigate('HomeFavortosScreen',{
+  //     edioraId: id,
+  //   });
+  // }
 
   
+  const renderItem = ({ item }) => {
+    const backgroundColor = item.codigoLivro === selectedId ? "#665313" : "#EACE73";
+    const color = item.codigoLivro === selectedId ? 'white' : 'black';
+
+    return (
+      <Item
+        item={item}
+        onPress={() => setSelectedId(item.codigoLivro)}
+        backgroundColor={{ backgroundColor }}
+        textColor={{ color }}
+      />
+    );
+  };
+
     return (
       <>
         <SafeAreaView style={styles.container}>
-        <Text style={styles.title}>Favoritos</Text>
-        
-        <View>
-        
-          <View style={styles.screenContainer}>
-          <Text style={styles.itens}>Itens</Text>
-          <Button 
-          color="red"
-          title="Remover livro"
-          onPress={() => Alert.alert('Removido com sucesso!')}
-        />
+          <Text style={styles.title}>Favoritos</Text>
+         
+          <View>
+          
+            <View style={styles.screenContainer}>
+            <Text style={styles.itens}>Itens</Text>
+            <Button 
+            color="red"
+            title="Remover livro"
+            onPress={() => Alert.alert('Removido com sucesso!')}
+          />
+          </View>
         </View>
-        </View>
-        {/* <FlatList
+        <FlatList
           data={dadosFavoritos}
           renderItem={renderItem}
-          keyExtractor={(item:any) => item.codigoLivro}
+          keyExtractor={(item) => item.codigoLivro}
           extraData={selectedId}
-        /> */}
-        </SafeAreaView>
+        />
+          </SafeAreaView>
+      
       </>
     );
+
 }
 
 const styles = StyleSheet.create({
@@ -116,8 +128,8 @@ const styles = StyleSheet.create({
     flex:3, 
     width:140, 
     height:140
-  }}
-);
-
-
+  }
+  
+  
+});
 export default Favorito;

@@ -14,7 +14,9 @@ import AxiosInstance from '../../api/AxiosInstance';
 
 import { DataContext } from '../../context/DataContext';
 import { DadosEditoraType } from '../../models/DadosEditoraType';
+import CardLayout from '../../components/Card/Card';
 
+// import CardFav from '../../components/Card/Card';
 
 const HomeEditora = ({route,navigation}) => {
 
@@ -95,86 +97,24 @@ const HomeEditora = ({route,navigation}) => {
 
     <ScrollView>
       <SafeAreaView>
-          {
+            {
             listaLivro.map((o)=>{
-
               return(
               <>
-              <SafeAreaView style={{}}>
-                <Card 
-                  key={`editora_grid${o.codigoLivro}`} 
-                  containerStyle={{
-                    height:320,
-                    width:200,
-                    alignItems:'center',
-                    justifyContent:'center',
-                    marginLeft: Dimensions.get('window').width * 0.25,
-                  }}
+                <CardLayout
+                  nomeLivro={o.nomeLivro}
+                  codigoLivro={o.codigoLivro}
+                  urlImagem={o.urlImagem}
+                  nomeEditora={dadosEditora?.nomeEditora}
                   
-                  >
-                  <Card.Title
-                    style={{paddingTop:10}}  
-                  >
-                    {o.nomeLivro}
-                  </Card.Title>
-                  <Card.Divider />
-                  <Card.Image
-                    style={{ 
-                      padding: 0,
-                      height:150,
-                      width:120,
-                      justifyContent:'center',
-                    }}
-                    // source={{
-                    //   uri:
-                    //     'https://awildgeographer.files.wordpress.com/2015/02/john_muir_glacier.jpg',
-                    // }}
-                    source={{
-                      uri:o.urlImagem}
-                    }
-                 
-                  />
-                  <Text 
-                    style={{ 
-                      marginBottom: 10 ,
-                      marginTop: 10 ,
-                    }}>
-                    Editora: {dadosEditora?.nomeEditora}
-                  </Text>
-                  <Button
-                    icon={
-                      <Icon
-                        name="code"
-                        color="#ffffff"
-                        iconStyle={{ marginRight: 10 }}
-                      />
-                    }
-                    buttonStyle={{
-                      borderRadius: 0,
-                      marginLeft: 0,
-                      marginRight: 0,
-                      marginBottom: 0,
-                    }}
-                    title="Ver Livro"
-                    onPress={() =>{ 
-
-                      navigation.navigate(
-                        'HomeLivro',
-                        {
-                          id:o.codigoLivro,
-                          nomeEditora:dadosEditora?.nomeEditora
-                        }
-                      )
-                    }}
-                  />
-                </Card>  
-              </SafeAreaView>
-              </>)
-
-            })
+                />
+              </>
+              )
+            }
+            )
           }
-        
       </SafeAreaView>
+
     </ScrollView>
   </SafeAreaView>
   </>

@@ -10,6 +10,6 @@ export type DadosLivroType = {
     nomeImagem:string,
     nomeArquivoImagem:string,
     urlImagem:string,
-    editora:DadosEditoraType,
-    autor:DadosAutorType
+    editoraDTO:DadosEditoraType,
+    autorDTO:DadosAutorType
   }

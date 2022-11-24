@@ -1,5 +1,4 @@
-
-import { Dimensions, StyleSheet } from 'react-native';
+import { Dimensions, StatusBar, StyleSheet } from 'react-native';
 
 export const styles =  StyleSheet.create({
     container: {
@@ -50,10 +49,6 @@ export const styles =  StyleSheet.create({
         fontWeight: 'bold',
         fontSize: 18
     },
-    title: {
-      color: '#fff',
-      fontSize: 22
-    },
     button: {
       height: 50,
       borderRadius: 10,
@@ -62,5 +57,45 @@ export const styles =  StyleSheet.create({
       alignItems: 'center',
       width: 300,
       marginTop: 20
+    },
+    container2: {
+      flex: 1,
+      marginTop: StatusBar.currentHeight || 0,
+      // alignItems:'center',
+      justifyContent:'space-around'
+
+    },
+    item: {
+      marginHorizontal: 8,
+      marginBottom:20,
+      padding:10,
+      width:200,
+      height:200,
+      justifyContent:'center',
+      flexDirection:"row",
+      alignItems:'center',
+    },
+    sectionTitle: {
+      fontSize: 24,
+      marginLeft: 10,
+      marginBottom:6,
+      fontWeight: 'bold'
+    },
+    title: {
+      fontSize: 14,
+      flex:.8
+    },
+    btnItem:{
+      flexDirection:"column",
+      alignItems:'center',
+      justifyContent:'center', 
+      width:200, 
+      height:200, 
+      marginBottom: 60
+    },
+    imgItem:{
+      flex:3, 
+      width:150, 
+      height:150
     }
 });

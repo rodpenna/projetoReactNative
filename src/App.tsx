@@ -7,12 +7,16 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { DataProvider } from './context/DataContext';
 
 import Login from './pages/Login/'
-import Home from './pages/Home/'
+// import Home from './pages/Home/'
+import Home from './pages/Home/index2'
+// import HomeEditoras from './pages/HomeEditoras'
 import HomeEditoras from './pages/HomeEditoras'
 import HomeEditora from './pages/HomeEditora';
 import HomeLivro from './pages/HomeLivro';
-import Cart from './pages/Cart';
-import Favorito from './pages/Favoritos';
+import Cart from './pages/Cart/index2';
+// import Cart from './pages/Cart';
+import Favorito from './pages/Favoritos/index2';
+// import Favorito from './pages/Favoritos';
 import Pesquisa from './pages/Pesquisa';
 
 
@@ -43,8 +47,8 @@ const BottomNavigator = () => {
       />
 
       <TabBottomNavigation.Screen 
-        name="Pesquisa" 
-        component={Pesquisa}
+        name="HomeEditoras" 
+        component={HomeEditoras}
         options={{
           title:'',
           tabBarIcon: ({focused})=> (<Ionicons name='search' color={focused?"#F4D05A":"#473b14"} size={30}/>)
