@@ -106,7 +106,7 @@ const HomeEditora = ({route,navigation}) => {
                   codigoLivro={o.codigoLivro}
                   urlImagem={o.urlImagem}
                   nomeEditora={dadosEditora?.nomeEditora}
-                  
+                  key={`editora_grid${o.codigoLivro}`}
                 />
               </>
               )

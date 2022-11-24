@@ -12,7 +12,8 @@ import Home from './pages/Home/index2'
 // import HomeEditoras from './pages/HomeEditoras'
 import HomeEditoras from './pages/HomeEditoras'
 import HomeEditora from './pages/HomeEditora';
-import HomeLivro from './pages/HomeLivro';
+// import HomeLivro from './pages/HomeLivro';
+import HomeLivro from './pages/HomeLivro/index2';
 import Cart from './pages/Cart/index2';
 // import Cart from './pages/Cart';
 import Favorito from './pages/Favoritos/index2';

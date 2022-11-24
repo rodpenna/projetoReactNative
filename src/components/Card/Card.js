@@ -18,8 +18,9 @@ import { incrementLocalData } from '../../services/LocalStorageService';
 * -codigoLivro
 * -urlImagem
 * -nomeEditora
+* -key
 */
-const CardLayout = (props) => {
+const CardLayout = (props,{nav}) => {
   
   const addFavorite = (livro) => {
     //console.log(`Favoritos: Livro selecionado: ${JSON.stringify(livro)}`);
@@ -33,7 +34,7 @@ const CardLayout = (props) => {
 
            
     <Card 
-      key={`editora_grid${props.codigoLivro}`} 
+      key={props.key} 
       containerStyle={styles.containerCard}
       >
       <Card.Title
@@ -68,13 +69,10 @@ const CardLayout = (props) => {
                 buttonStyle={styles.button}
                 title=""
                 onPress={() =>{ 
-                navigation.navigate(
-                    'HomeLivro',
-                    {
-                    id:props.codigoLivro,
-                    nomeEditora:props.nomeEditora
-                    }
-                )
+                  nav(
+                    props.codigoLivro,
+                    props.nomeEditora
+                  )
                 }}
             />
         </SafeAreaView>

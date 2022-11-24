@@ -4,63 +4,75 @@ import { Dimensions, StyleSheet } from 'react-native';
 export const styles =  StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: '#91886985'
+      backgroundColor: '#91886985',
+      paddingTop:10
     },
-    cabecalho: {
-      flex: 1,
-      justifyContent: 'flex-end',
+    containerGlobal: {
+      height:400,
+      width:250,
+      alignItems:'center',
+      justifyContent:'center',
+      marginLeft: Dimensions.get('window').width*0.2,
+      marginBottom:30,
+      marginTop:20,
+      
+      
+  },
+
+  containerCard:{
+      height:500,
+      width:250,
+      alignItems:'center',
+      justifyContent:'center',
+      backgroundColor:'#49484143',
+      paddingTop:10,
+      marginTop:100
+      
+  },
+
+  mainTitle:{
+      fontSize:18,
+      color:'#000000',
+      paddingTop:10
+  },
+
+  cardImage:{
+      padding: 0,
+      height:220,
+      width:150,
       alignItems: 'center',
-      paddingVertical: 20,
-      marginBottom: 10
-    },
-    titulo: {
-      fontSize: 30,
-      fontWeight: 'bold',
-      color: '#000'
-    },
-    conteudo: {
+      justifyContent:'center',
+  },
+
+  mainText:{
+      fontSize:18,
+      color:'#000000',
+      marginBottom: 10 ,
+      marginTop: 10 ,
+      
+  },
+
+  containerGlobalButton:{
       flex: 1,
-      justifyContent: 'center',
-      alignItems: 'center'
-    },
-    input: {
-        borderWidth: 2,
-        borderRadius: 10,
-        width: Dimensions.get('window').width * 0.9,
-        marginVertical: 10,
-        paddingHorizontal: 15,
-        paddingVertical: 13,
-        paddingBottom:10,
-        fontWeight: "bold"
-    },
-    rodape: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: "space-between",
+      marginLeft:0,
+  },
+
+  containerButton:{
       flex: 1,
-      alignItems: 'center',
-      marginTop:50
-    },
-    botao: {
-        backgroundColor: '#68520a',
-        width: Dimensions.get('window').width * 0.9,
-        paddingVertical: 20,
-        borderRadius: 10,
-    },
-    textoBotao: {
-        color: '#fff',
-        textAlign: 'center',
-        fontWeight: 'bold',
-        fontSize: 18
-    },
-    title: {
-      color: '#fff',
-      fontSize: 22
-    },
-    button: {
-      height: 50,
-      borderRadius: 10,
-      backgroundColor: '#fff',
-      justifyContent: 'center',
-      alignItems: 'center',
-      width: 300,
-      marginTop: 20
-    }
+      justifyContent:'center',
+  },
+
+  button:{
+      borderRadius: 0,
+      marginLeft: 0,
+      marginRight: 0,
+      marginBottom: 0,
+      height:50,
+      width:50,
+      backgroundColor:'#494841fc',
+      justifyContent:'center',
+  },
 });

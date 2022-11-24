@@ -26,30 +26,36 @@ const Item = ({item, onPress, backgroundColor, textColor}) => (
 );
 
 
+
+
+
 // ------Home---------------
 
 const Home = ({navigation}) => {
-  const {dadosUsuario} = useContext(DataContext);
+const {dadosUsuario} = useContext(DataContext);
 
-  //----------------
-  //Get Editoras
+//-------------------------------------
+//Get Editoras
 
-  const [dadosEditora, setDadosEditora] = useState<DadosEditoraType[]>([]);
-  const [livrosRecentes, setLivrosRecentes] = useState<DadosLivroType[]>([]);
+const [dadosEditora, setDadosEditora] = useState<DadosEditoraType[]>([]);
+const [livrosRecentes, setLivrosRecentes] = useState<DadosLivroType[]>([]);
 
 
-  const getAllEditoras = async () => {
-    AxiosInstance.get('/editoras', {
-      headers: {Authorization: `Bearer ${dadosUsuario?.token}`},
+const getAllEditoras = async () => {
+  AxiosInstance.get('/editoras', {
+    headers: {Authorization: `Bearer ${dadosUsuario?.token}`},
+  })
+    .then(resultado => {
+      setDadosEditora(resultado.data);
     })
-      .then(resultado => {
-        setDadosEditora(resultado.data);
-      })
-      .catch(error => {
-        console.log('error ao recuperar dados', JSON.stringify(error));
-      });
-  };
-
+    .catch(error => {
+      console.log('error ao recuperar dados', JSON.stringify(error));
+    });
+};
+useEffect(() => {
+  getAllEditoras()
+}, []);
+  //--------------------------------------------------
   // Get Livros com filtro no id
 
   const getLivroRecentes = async () => {
@@ -59,7 +65,7 @@ const Home = ({navigation}) => {
       .then(resultado => {
         let index = resultado.data.length
         setLivrosRecentes(resultado.data.filter((l:any) => l.codigoLivro > (index-5)))
-        
+        setDestaque(resultado.data[0])
       })
       .catch(error => {
         console.log('error ao recuperar dados', JSON.stringify(error));
@@ -67,15 +73,11 @@ const Home = ({navigation}) => {
   };
 
   useEffect(() => {
-    getAllEditoras(),
-    getLivroRecentes();
-
+    getLivroRecentes()
   }, []);
 
   //--------------------------
   //GRID DE EDITORAS
-
-
 
   const [selectedId, setSelectedId] = useState(null);
 
@@ -96,21 +98,16 @@ const Home = ({navigation}) => {
       />
     );
   };
+
   //------------------------------------
- 
-  
   //GRID RECENTES
 
   const gridRecentes = ({item}) => {
-    const codlgoLivro = item.codlgoLivro;
+    const codigoLivro = item.codigoLivro;
     const nomeLivro = item.nomeLivro;
-    const urlImagem = item.urlImagem;
-
-   
+    const urlImagem = item.urlImagem;  
     return (
-
       <>
-        
         <SafeAreaView style={styles.card}>
         <Card>
             <Card.Title>{nomeLivro}</Card.Title>
@@ -142,19 +139,24 @@ const Home = ({navigation}) => {
               }}
               title="Ver Livro"
               onPress={() =>{ 
-                navigation.navigate('HomeLivro',{codlgoLivro})
+                console.log(codigoLivro)
+                navigation.navigate('HomeLivro',{id:codigoLivro})
               }}
             />
           </Card>
           </SafeAreaView>
       </>
       );
-    
   }
 
 
   //----------------------------------
+  //Destaque
 
+  const [destaque,setDestaque] = useState<DadosLivroType>()
+
+
+  //----------------------------------
   return (
     <>
       <ScrollView>
@@ -199,34 +201,38 @@ const Home = ({navigation}) => {
         <SafeAreaView style={styles.container}>
           <Text style={styles.title}>Destaque</Text>
           <Card>
-            <Card.Title>{`livrosRecentes[0].nomeLivro`}</Card.Title>
+            <Card.Title>{destaque?.nomeLivro}</Card.Title>
             <Card.Divider />
             <Card.Image
               style={{padding: 0}}
               source={{
-                uri: 'https://m.media-amazon.com/images/I/61J4TVU5q6L._SX612_BO1,204,203,200_.jpg',
+                uri: destaque?.urlImagem
               }}
             />
-            <Text style={{marginBottom: 10}}>
-           Com diversos assassinos internacionais extremamente insanos e habilidosos prestes a invadir Tokyo, toda a Divisão Especial prepara um plano para protegê-lo!! A matança desenfreada mergulhará a cidade em um redemoinho de caos infernal!!
-            </Text>
-            <Button
-              icon={
-                <Icon
-                  name="code"
-                  color="#ffffff"
-                  iconStyle={{marginRight: 10}}
+            <SafeAreaView>
+              <SafeAreaView>
+                <Button
+                  icon={
+                    <Icon
+                      name="code"
+                      color="#ffffff"
+                      iconStyle={{marginRight: 10}}
+                    />
+                  }
+                  buttonStyle={{
+                    borderRadius: 0,
+                    marginLeft: 0,
+                    marginRight: 0,
+                    marginBottom: 0,
+                    backgroundColor: '#736A4D',
+                  }}
+                  title="Ver Livro"
+                  onPress={() =>{ 
+                    navigation.navigate('HomeLivro',destaque?.codigoLivro)
+                  }}
                 />
-              }
-              buttonStyle={{
-                borderRadius: 0,
-                marginLeft: 0,
-                marginRight: 0,
-                marginBottom: 0,
-                backgroundColor: '#736A4D',
-              }}
-              title="Ver Livro"
-            />
+              </SafeAreaView>
+            </SafeAreaView>
           </Card>
         </SafeAreaView>
       </ScrollView>

@@ -15,6 +15,8 @@ import AxiosInstance from '../../api/AxiosInstance';
 
 import { DataContext } from '../../context/DataContext';
 
+import {incrementLocalData} from '../../services/LocalStorageService'
+
 
 const HomeLivro = ({route,navigation}) => {
 
@@ -63,72 +65,129 @@ const HomeLivro = ({route,navigation}) => {
 
 
     //--------------------------
+    //Favoritos
+
+    function addFavorito (livro:any){
+
+      incrementLocalData('favLivro',livro)
+
+    }
+
+
+
+
+
+
+    //---------------------------
+    //Carrinho
+
+    function addCarrinho (livro:any){
+
+      incrementLocalData('Carrinho', livro )
+
+    }
+
+
+    //--------------------------
+
     return (
     <>
-
-
-        <SafeAreaView style={styles.container}>
-            {
-                 <Card 
-                 key={`livro_detail${dadosLivro?.codigoLivro}`} 
-                 containerStyle={{
-                   height:320,
-                   width:200,
-                   alignItems:'center',
-                   justifyContent:'center',
-                   marginLeft: Dimensions.get('window').width * 0.25,
-                 }}
-                 
-                 >
-                 <Card.Title
-                   style={{paddingTop:10}}  
-                 >
-                   {dadosLivro?.nomeLivro}
-                 </Card.Title>
-                 <Card.Divider />
-                 <Card.Image
-                   style={{ 
-                     padding: 0,
-                     height:150,
-                     width:120,
-                     justifyContent:'center',
-                   }}
-                   source={{
-                     uri:dadosLivro?.urlImagem}
-                   }
-                
-                 />
-                 <Text 
-                   style={{ 
-                     marginBottom: 10 ,
-                     marginTop: 10 ,
-                   }}>
-                   Editora: {dadosLivro?.editoraDTO?.nomeEditora}
-                 </Text>
-                 <Button
-                   icon={
-                     <Icon
-                       name="code"
-                       color="#ffffff"
-                       iconStyle={{ marginRight: 10 }}
-                     />
-                   }
-                   buttonStyle={{
-                     borderRadius: 0,
-                     marginLeft: 0,
-                     marginRight: 0,
-                     marginBottom: 0,
-                   }}
-                   title="Comprar"
-                   onPress={() =>{ 
-
-                     navigation.navigate('HomeLivro',{id:dadosLivro?.codigoLivro})
-                   }}
-                 />
-               </Card>  
-            }
-
+    <SafeAreaView style={styles.container}>
+      
+      {
+      <Card 
+        key={`livro_detail${dadosLivro?.codigoLivro}`} 
+        containerStyle={{
+        height:320,
+        width:200,
+        alignItems:'center',
+        justifyContent:'center',
+        marginLeft: Dimensions.get('window').width * 0.25,
+        }}
+      >
+        <Card.Title
+          style={{paddingTop:10}}  
+        >
+          {dadosLivro?.nomeLivro}
+        </Card.Title>
+        <Card.Divider />
+      <SafeAreaView>
+        <SafeAreaView>
+          <Card.Image
+            style={{ 
+              padding: 0,
+              height:150,
+              width:120,
+              justifyContent:'center',
+            }}
+            source={{
+              uri:dadosLivro?.urlImagem
+            }}
+          />
         </SafeAreaView>
+        
+          <Text 
+            style={{ 
+              marginBottom: 10 ,
+              marginTop: 10 ,
+            }}>
+            Editora: {dadosLivro?.editoraDTO?.nomeEditora}
+          </Text>
+
+        <SafeAreaView>
+          <SafeAreaView>
+            <Button
+              icon={
+                <Icon
+                  name="code"
+                  color="#0e0e0e"
+                  iconStyle={{ marginRight: 10 }}
+                />
+              }
+              buttonStyle={{
+                borderRadius: 0,
+                marginLeft: 0,
+                marginRight: 0,
+                marginBottom: 0,
+              }}
+              title="Comprar"
+              onPress={() =>{ 
+
+                navigation.navigate('HomeLivro',{id:dadosLivro?.codigoLivro})
+              }}
+            />
+          </SafeAreaView>
+
+          <SafeAreaView>
+            <Button
+              icon={
+                <Icon
+                  name="heart"
+                  color="#000000"
+                  iconStyle={{ marginRight: 10 }}
+                />
+              }
+              buttonStyle={{
+                borderRadius: 0,
+                marginLeft: 0,
+                marginRight: 0,
+                marginBottom: 0,
+              }}
+              title="Fav"
+              onPress={() =>{ 
+                // addFavLivro(dadosLivro);
+                console.log("Add Fav")
+              }}
+            />                  
+          </SafeAreaView>
+        </SafeAreaView>
+      </SafeAreaView>
+      </Card>  
+
+          
+      }
+
+    </SafeAreaView>
 
 
 
