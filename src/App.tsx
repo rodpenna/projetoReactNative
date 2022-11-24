@@ -139,6 +139,17 @@ const App = () => {
               },
             }}
           />
+           <Stack.Screen
+            name="Favorito" 
+            component={Favorito} 
+            options={{
+              title: '',
+              headerStyle: {
+                backgroundColor: '#504e2e',
+              },
+            }}
+          />
+         
 
         </Stack.Navigator> 
       </NavigationContainer>
