@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
   Button,
   Alert,
-  StyleSheet,
+  StyleSheet,ActivityIndicator,SafeAreaView
   
 } from 'react-native';
 
@@ -22,6 +22,10 @@ import Modal from '../../components/Modal/Modal'
 import { DataContext } from '../../context/DataContext';
 
 const Login = ({navigation}) => {
+
+  //---------------------------
+  //Loading
+  const [loading,setLoading] = useState(false)
 
 
   //----------------------------
@@ -42,11 +46,13 @@ const Login = ({navigation}) => {
 
   function goHome(){
 
-    setModal(true)
+    setLoading(true)
 
     let timer1 = setTimeout(() => {
-      navigation.navigate('BottomNavigator')
-  }, 2000);
+      navigation.navigate('BottomNavigator')  
+      setLoading(false)    
+    }, 500);
+    
   }
 
   //user1@mail.com
@@ -64,10 +70,7 @@ const Login = ({navigation}) => {
       if (retorno.status===200){
         
         tokenJwt = retorno.data
-        console.log('retorno :' + JSON.stringify(tokenJwt))
         armazenarDadosUsuario(tokenJwt['jwt-token'])
-
-
         goHome()
       }
       else{
@@ -82,38 +85,49 @@ const Login = ({navigation}) => {
   }
 
 
+  if (!loading){
 
-  return (
-    <>
-      <View style={styles.container}>
-
-        <View style={styles.cabecalho}>
-          <Text style={styles.titulo}>Bem-Vindo</Text>
-        </View>
-
-        <View style={styles.conteudo}>
-
-          <TextInput value={email} onChangeText={setEmail} style={styles.input} placeholder='E-mail' />
-          <TextInput value={senha} onChangeText={setSenha} style={styles.input} placeholder='Senha' secureTextEntry={true} />
-
-        </View>
-
-        <View style={styles.rodape}>
-            <TouchableOpacity style={styles.botao}>
-              <Text onPress={handleLogin} style={styles.textoBotao}>Login</Text>
-            </TouchableOpacity>
-        </View>
+    return (
+      <>
+        <View style={styles.container}>
+  
+          <View style={styles.cabecalho}>
+            <Text style={styles.titulo}>Bem-Vindo</Text>
+          </View>
+  
+          <View style={styles.conteudo}>
+  
+            <TextInput value={email} onChangeText={setEmail} style={styles.input} placeholder='E-mail' />
+            <TextInput value={senha} onChangeText={setSenha} style={styles.input} placeholder='Senha' secureTextEntry={true} />
+  
+          </View>
+  
+          <View style={styles.rodape}>
+              <TouchableOpacity style={styles.botao}>
+                <Text onPress={handleLogin} style={styles.textoBotao}>Login</Text>
+              </TouchableOpacity>
+          </View>
+       
+      
      
-        <Modal 
-          show={modal}
-          close={() => setModal(false)}
-        />
+              
+        </View>
+      </>
+    );
 
-   
-            
-      </View>
-    </>
-  );
+  }
+  else{
+
+    return (<>
+      <SafeAreaView style={styles.loading}>
+        <ActivityIndicator size="large" color="#4E5AA6" />
+      </SafeAreaView>
+    </>)
+
+  }
+
+
+  
 };
 
 
