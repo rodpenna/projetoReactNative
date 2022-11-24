@@ -101,13 +101,87 @@ const HomeEditora = ({route,navigation}) => {
             listaLivro.map((o)=>{
               return(
               <>
-                <CardLayout
-                  nomeLivro={o.nomeLivro}
-                  codigoLivro={o.codigoLivro}
-                  urlImagem={o.urlImagem}
-                  nomeEditora={dadosEditora?.nomeEditora}
-                  key={`editora_grid${o.codigoLivro}`}
-                />
+                <SafeAreaView style={styles.containerGlobal}>
+                  <Card 
+                    key={`grid_editora_livro${o.codigoLivro}`} 
+                    containerStyle={styles.containerCard}
+                    >
+                    <Card.Title
+                      style={styles.mainTitle}  
+                    >
+                      {o.nomeLivro}
+                    </Card.Title>
+
+                    <Card.Divider />
+
+                    <Card.Image
+                      style={styles.cardImage}
+                      source={{
+                        uri:o.urlImagem}
+                      }
+                    />
+                    <Text 
+                      style={styles.mainText}>
+                      Editora: {o.editoraDTO?.nomeEditora}
+                    </Text>
+
+                    <SafeAreaView style={styles.containerGlobalButton}>
+                      <SafeAreaView style={styles.containerButton}>
+                          <Button
+                              icon={
+                              <Icon
+                                  name="info"
+                                  color='#fff'
+                                  iconStyle={{ marginRight: 10 }}
+                              />
+                              }
+                              buttonStyle={styles.button}
+                              title=""
+                              onPress={() =>{ 
+                                navigation.navigate('HomeLivro',{
+                                  id:o.codigoLivro,
+                                  nomeEditora:o.editoraDTO?.nomeEditora
+                                })
+                              }}
+                        />
+                      </SafeAreaView>
+                      <SafeAreaView style={{ flex: 1,  }}>
+                        <Button
+                          icon={
+                          <Icon
+                              name="add-shopping-cart"
+                              color='#fff'
+                              iconStyle={{ marginRight: 10 }}
+                          />
+                          }
+                          buttonStyle={styles.button}
+                          title=""
+                          onPress={() =>{ 
+                          console.log("Adicionado carrinho")
+                          }}
+                        />
+                        </SafeAreaView>
+                        <SafeAreaView style={{ flex: 1, }}>
+                          <Button
+                            icon={
+                            <Icon
+                                name="favorite"
+                                color='#fff'
+                                iconStyle={{ marginRight: 10 }}
+                            />
+                            }
+                            buttonStyle={styles.button}
+                            onPress={() =>{ 
+                            console.log("Adicionado aos favoritos")
+                            // addFavorite(props.livro)
+                            }}
+                          />
+                        </SafeAreaView>
+                      </SafeAreaView>    
+                    </Card>  
+                  </SafeAreaView>
+
+
               </>
               )
             }

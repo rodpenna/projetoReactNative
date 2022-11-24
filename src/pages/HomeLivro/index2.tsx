@@ -84,7 +84,7 @@ const HomeLivro = ({route,navigation}) => {
     //Carrinho
 
     function addCarrinho (livro:any){
-
+      
       incrementLocalData('Carrinho', livro )
 
     }

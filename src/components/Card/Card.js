@@ -31,90 +31,82 @@ const CardLayout = (props,{nav}) => {
   <>
 
 <SafeAreaView style={styles.containerGlobal}>
+  <Card 
+    key={props.key} 
+    containerStyle={styles.containerCard}
+    >
+    <Card.Title
+      style={styles.mainTitle}  
+    >
+      {props.nomeLivro}
+    </Card.Title>
 
-           
-    <Card 
-      key={props.key} 
-      containerStyle={styles.containerCard}
-      >
-      <Card.Title
-        style={styles.mainTitle}  
-      >
-        {props.nomeLivro}
-      </Card.Title>
+    <Card.Divider />
 
-      <Card.Divider />
-
-      <Card.Image
-        style={styles.cardImage}
-        source={{
-          uri:props.urlImagem}
-        }
-      />
-      <Text 
-        style={styles.mainText}>
-        Editora: {props.nomeEditora}
-      </Text>
+    <Card.Image
+      style={styles.cardImage}
+      source={{
+        uri:props.urlImagem}
+      }
+    />
+    <Text 
+      style={styles.mainText}>
+      Editora: {props.nomeEditora}
+    </Text>
 
     <SafeAreaView style={styles.containerGlobalButton}>
-        <SafeAreaView style={styles.containerButton}>
-            <Button
-                icon={
-                <Icon
-                    name="info"
-                    color='#fff'
-                    iconStyle={{ marginRight: 10 }}
-                />
-                }
-                buttonStyle={styles.button}
-                title=""
-                onPress={() =>{ 
-                  nav(
-                    props.codigoLivro,
-                    props.nomeEditora
-                  )
-                }}
-            />
-        </SafeAreaView>
-        <SafeAreaView style={{ flex: 1,  }}>
-            <Button
-                icon={
-                <Icon
-                    name="add-shopping-cart"
-                    color='#fff'
-                    iconStyle={{ marginRight: 10 }}
-                />
-                }
-                buttonStyle={styles.button}
-                title=""
-                onPress={() =>{ 
-                console.log("Adicionado carrinho")
-                }}
-            />
+      <SafeAreaView style={styles.containerButton}>
+          <Button
+              icon={
+              <Icon
+                  name="info"
+                  color='#fff'
+                  iconStyle={{ marginRight: 10 }}
+              />
+              }
+              buttonStyle={styles.button}
+              title=""
+              onPress={() =>{ 
+                nav(
+                  props.codigoLivro,
+                  props.nomeEditora
+                )
+              }}
+        />
+      </SafeAreaView>
+      <SafeAreaView style={{ flex: 1,  }}>
+        <Button
+          icon={
+          <Icon
+              name="add-shopping-cart"
+              color='#fff'
+              iconStyle={{ marginRight: 10 }}
+          />
+          }
+          buttonStyle={styles.button}
+          title=""
+          onPress={() =>{ 
+          console.log("Adicionado carrinho")
+          }}
+        />
         </SafeAreaView>
         <SafeAreaView style={{ flex: 1, }}>
-            <Button
-                icon={
-                <Icon
-                    name="favorite"
-                    color='#fff'
-                    iconStyle={{ marginRight: 10 }}
-                />
-                }
-                buttonStyle={styles.button}
-                onPress={() =>{ 
-                console.log("Adicionado aos favoritos")
-                // addFavorite(props.livro)
-                }}
+          <Button
+            icon={
+            <Icon
+                name="favorite"
+                color='#fff'
+                iconStyle={{ marginRight: 10 }}
             />
+            }
+            buttonStyle={styles.button}
+            onPress={() =>{ 
+            console.log("Adicionado aos favoritos")
+            // addFavorite(props.livro)
+            }}
+          />
         </SafeAreaView>
-    </SafeAreaView>
-
-
-
-
-     
-
+      </SafeAreaView>    
     </Card>  
   </SafeAreaView>
     

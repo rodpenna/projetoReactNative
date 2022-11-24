@@ -228,7 +228,7 @@ useEffect(() => {
                   }}
                   title="Ver Livro"
                   onPress={() =>{ 
-                    navigation.navigate('HomeLivro',destaque?.codigoLivro)
+                    navigation.navigate('HomeLivro',{id:destaque?.codigoLivro})
                   }}
                 />
               </SafeAreaView>

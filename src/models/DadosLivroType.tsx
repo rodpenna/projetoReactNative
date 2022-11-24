@@ -11,5 +11,6 @@ export type DadosLivroType = {
     nomeArquivoImagem:string,
     urlImagem:string,
     editoraDTO:DadosEditoraType,
-    autorDTO:DadosAutorType
+    autorDTO:DadosAutorType,
+    preco:0
   }
