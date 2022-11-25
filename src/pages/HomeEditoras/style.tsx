@@ -3,7 +3,7 @@ import { Dimensions, StatusBar, StyleSheet } from 'react-native';
 export const styles =  StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: '#91886985'
+      backgroundColor: 'rgb(192, 187, 171)'
     },
     cabecalho: {
       flex: 1,
@@ -23,6 +23,7 @@ export const styles =  StyleSheet.create({
       alignItems: 'center'
     },
     input: {
+        marginLeft:17,
         borderWidth: 2,
         borderRadius: 10,
         width: Dimensions.get('window').width * 0.9,
@@ -31,6 +32,7 @@ export const styles =  StyleSheet.create({
         paddingVertical: 13,
         paddingBottom:10,
         fontWeight: "bold"
+
     },
     rodape: {
       flex: 1,
@@ -77,7 +79,7 @@ export const styles =  StyleSheet.create({
     },
     sectionTitle: {
       fontSize: 24,
-      marginLeft: 10,
+      marginLeft: 0,
       marginBottom:6,
       fontWeight: 'bold'
     },

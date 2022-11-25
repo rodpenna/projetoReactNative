@@ -15,9 +15,8 @@ import AxiosInstance from '../../api/AxiosInstance';
 
 import { Card, Button, Icon } from '@rneui/themed';
 import { DataContext } from '../../context/DataContext';
-import { DadosLivroType } from '../../models/DadosLivroType';
-import {DadosLivrosType} from '../../models/DadosLivrosType';
-import { storeLocalData, incrementLocalData, retrieveLocalData, removeLocalData,clearStorage } from '../../services/LocalStorageService';
+import {DadosLivroType} from '../../models/DadosLivroType';
+import { storeLocalData, incrementLocalData, retrieveLocalData, removeLocalData,clearStorage,removeFromFavoritosByKeyAndValue } from '../../services/LocalStorageService';
 
 const Item = ({ item, onPress, backgroundColor, textColor }) => (
   <TouchableOpacity onPress={onPress} style={[styles.item, backgroundColor]}>
@@ -30,19 +29,21 @@ const Item = ({ item, onPress, backgroundColor, textColor }) => (
 
 const Favorito = ({route,navigation}) => {
   const {dadosUsuario,badgeCounter} = useContext(DataContext)
-  const [dadosFavoritos, setDadosFavoritos] = useState<DadosLivrosType[]>([]);
+
   const [selectedId, setSelectedId] = useState(null);
-  const [favoritos,setFavoritos] =  useState<DadosLivrosType[]>([]);
+  const [favoritos,setFavoritos] =  useState<DadosLivroType[]>([]);
 
   useEffect(() => {
-    // getAllFavoritos();
     getStorageFav();
-    // const data = retrieveLocalData('livroFav')
-    //    setFavoritos(data)
-    // console.log('oi',data);
-     
-      
   },[favoritos]);
+
+  // useEffect(() => {
+  
+  //   getStorageFav();
+   
+      
+  // },[]);
+
 
   // const getAllFavoritos = async () =>{
   //   AxiosInstance.get(
@@ -63,57 +64,85 @@ const Favorito = ({route,navigation}) => {
   //   });
   // }
 
-    const getStorageFav = async () => {
-     const data = await retrieveLocalData('livroFav')
-     if(data !== undefined){
-      let teste=JSON.parse(data)      
-      setFavoritos(teste) 
-     }
-    }
-  
+  const getStorageFav = async () => {
+    let data = await retrieveLocalData('livroFav')
+    setFavoritos(data ? JSON.parse(data):[]) 
+   }
+
+
   const renderItem = ({ item }) => {
-    const backgroundColor = item.codigoLivro === selectedId ? "#rgb(161, 157, 143)" : "#rgb(161, 157, 143)";
-    const color = item.codigoLivro === selectedId ? 'white' : 'black';
-  
+    const backgroundColor = item.codigoLivro === selectedId ? "rgb(161, 157, 143)" : "rgb(161, 157, 143)";
+    const color = item.codigoLivro === selectedId ? 'black' : 'black';
+  const id = item.codigoLivro
     
     return (
-      <Item
+      <View style={styles.Background}>
+      <><Item 
         item={item}
         onPress={() => setSelectedId(item.codigoLivro)}
         backgroundColor={{ backgroundColor }}
-        textColor={{ color }}
-      />
+        textColor={{ color }} />
+
+      <View style={styles.Botao}>
+        <Button
+            color={'red'}
+          onPress={()=>{
+            badgeCounter(-1)
+            removeItemFavorito(item.codigoLivro)}}
+        >Excluir</Button>
+        </View>
+        </>
+        </View>
     );
   };
 
+    const removeItemFavorito= (id:any) =>{
+        removeFromFavoritosByKeyAndValue('livroFav',id)
+    }
+  
     return (
       <>
+      <View style={styles.Background}>
         <SafeAreaView style={styles.container}>
-          <Text style={styles.Favoritos}>Favoritos</Text>
+          <Text style={styles.title}>Favoritos</Text>
          
           <View>
           
             <View style={styles.screenContainer}>
-            {/* <Text style={styles.itens}>Itens</Text> */}
+            <Text style={styles.itens}></Text>
             <Button 
             color="red"
-            title="Remover Todos"
+            title="Excluir Todos"
             onPress={() => {
               removeLocalData('livroFav')
               badgeCounter(0)
+              console.log("limpo ?",favoritos);
               
+            }}
+          />
+
+
+          </View >
+        
+          <View style={styles.screenContainer2}>
+          <Button 
+            color="red"
+            title="Atualizar"
+            onPress={() => {
+              getStorageFav()
             }}
           />
           </View>
         </View>
-        <FlatList
+
+        <FlatList 
           data={favoritos}
           renderItem={renderItem}
           keyExtractor={(favoritos:any) => favoritos.codigoLivro}
           extraData={selectedId}
         />
           </SafeAreaView>
-      
+          </View>
       </>
     );
 
@@ -121,7 +150,7 @@ const Favorito = ({route,navigation}) => {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop:10
+    marginTop:10,
   },
   item: {
     padding: 20,
@@ -134,6 +163,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 25,
+
   },
   itens: {
     marginVertical: 8,
@@ -149,9 +179,20 @@ const styles = StyleSheet.create({
   },
   imgItem:{
     width:200, 
-    height:150
-  }
-  
+    height:150,
+  },
+  Background:{
+    backgroundColor:'rgb(192, 187, 171)'
+  },
+  Botao:{
+    marginLeft:70,
+    marginRight:70
+  },
+  screenContainer2: {
+    flexDirection: 'row',
+    top:-59,
+    marginLeft:60
+  },
   
 });
 export default Favorito;

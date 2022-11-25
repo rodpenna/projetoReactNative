@@ -39,8 +39,8 @@ const Cart = ({route,navigation}) => {
 
     return (
     <>
-           <SafeAreaView>
-           <View>
+           <SafeAreaView style={styles.Background}>
+           <View style={styles.Background}>
 
             <View>
               <Text style={styles.Pedido}>Pedido</Text>
@@ -76,7 +76,7 @@ const Cart = ({route,navigation}) => {
                 <Text style={styles.Cartao}> <Ionicons name="card" size={20}/>Cartão de credito</Text>
               </View>
 
-              <View>
+              <View >
                 <Selecionar></Selecionar>
               </View>
 
@@ -86,7 +86,8 @@ const Cart = ({route,navigation}) => {
              buttonStyle={{
                 marginLeft: 100,
                 marginRight: 100,
-                backgroundColor:'#736A4D'
+                backgroundColor:'#736A4D',
+                marginBottom:100
               }}
               title="Finalizar compra"
             />
@@ -98,7 +99,10 @@ const Cart = ({route,navigation}) => {
 }
 
 const styles = StyleSheet.create({
-   separator: {
+Background:{
+  backgroundColor:'rgb(192, 187, 171)'
+},
+separator: {
   marginVertical: 30,
   borderBottomColor: "black",
   borderBottomWidth: StyleSheet.hairlineWidth

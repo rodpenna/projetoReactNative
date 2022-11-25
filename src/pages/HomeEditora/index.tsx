@@ -87,8 +87,6 @@ const HomeEditora = ({route,navigation}) => {
   const addFavorite = (livro:any) => {
     //console.log(`Favoritos: Livro selecionado: ${JSON.stringify(livro)}`);
     incrementLocalData('livroFav', livro);
-    console.log('oi',livro);
-    
   }
   
   //-------------------
@@ -138,7 +136,7 @@ const HomeEditora = ({route,navigation}) => {
                     </Text>
 
                     <SafeAreaView style={styles.containerGlobalButton}>
-                      <SafeAreaView >
+                      <SafeAreaView style={styles.containerButton}>
                           <Button
                               icon={
                               <Icon
@@ -156,7 +154,7 @@ const HomeEditora = ({route,navigation}) => {
                               }}
                         />
                       </SafeAreaView>
-                      <SafeAreaView >
+                      <SafeAreaView style={{ flex: 1,  }}>
                         <Button
                           icon={
                           <Icon
@@ -171,7 +169,7 @@ const HomeEditora = ({route,navigation}) => {
                           }}
                         />
                         </SafeAreaView>
-                        <SafeAreaView >
+                        <SafeAreaView style={{ flex: 1, }}>
                           <Button
                             icon={
                             <Icon

@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useContext} from 'react';
+mport React, {useState, useEffect, useContext} from 'react';
 import {
   View,
   Text,
@@ -11,6 +11,7 @@ import {
 } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {Button, Card, Title, Paragraph} from 'react-native-paper';
+import { SearchBar } from '@rneui/themed';
 
 import AxiosInstance from '../../api/AxiosInstance';
 
@@ -36,14 +37,15 @@ const HomeEditoras = ({navigation}) => {
   // ---------Use States-----------
   const {dadosUsuario,badgeCounter} = useContext(DataContext);
   const [dadosEditora, setDadosEditora] = useState<DadosEditoraType[]>([]);
-  const [pesquisa, setPesquisa] = useState(null);
+  const [pesquisa, setPesquisa] = useState('');
   const [selectedId, setSelectedId] = useState(null);
 
   //Barra Pesquisa
 
-  function onChangeText(event: any) {
-    setPesquisa(event.target.value);
-  }
+
+  function onChangeSearch(event:any){
+    setPesquisa(event.target.value)
+    }
 
   // ----------Get Editoras---------------
 
@@ -89,14 +91,14 @@ const HomeEditoras = ({navigation}) => {
     <>
       <SafeAreaView style={styles.container}>
         <SafeAreaView>
-          <TextInput
-            style={styles.input}
-            onChangeText={e => {
-              onChangeText(e);
-            }}
-            value={pesquisa}
-            placeholder={'Pesquisar'}
-          />
+
+        <SearchBar
+        platform="default"
+        onChangeText={newVal => onChangeSearch(newVal)}
+        placeholder="Digite o nome do livro"
+        placeholderTextColor="#888"
+        value={pesquisa}
+      />
         </SafeAreaView>
 
         <View style={styles.container2}>

@@ -113,7 +113,7 @@ useEffect(() => {
             <Card.Title>{nomeLivro}</Card.Title>
             <Card.Divider />
             <Card.Image
-              style={{ padding: 0 }}
+              style={{ padding: 0, height:230 }}
               source={{
                 uri:
                   urlImagem,
@@ -123,13 +123,6 @@ useEffect(() => {
              
             </Text>
             <Button
-              icon={
-                <Icon
-                  name="code"
-                  color="#ffffff"
-                  iconStyle={{ marginRight: 10 }}
-                />
-              }
               buttonStyle={{
                 borderRadius: 0,
                 marginLeft: 0,
@@ -180,6 +173,7 @@ useEffect(() => {
         <SafeAreaView style={styles.container2}>
           <Text style={styles.title}>Recentes</Text>
           <SafeAreaView >
+            <View>
             <FlatList
               data={livrosRecentes}
               renderItem={gridRecentes}
@@ -191,10 +185,9 @@ useEffect(() => {
               style={{
                 height: 400,
                 flexGrow: 0,
-                
-                
               }}
             />
+            </View>
           </SafeAreaView>
           
         </SafeAreaView>
@@ -212,14 +205,7 @@ useEffect(() => {
             <SafeAreaView>
               <SafeAreaView>
                 <Button
-                  icon={
-                    <Icon
-                      name="code"
-                      color="#ffffff"
-                      iconStyle={{marginRight: 10}}
-                    />
-                  }
-                  buttonStyle={{
+                    buttonStyle={{
                     borderRadius: 0,
                     marginLeft: 0,
                     marginRight: 0,

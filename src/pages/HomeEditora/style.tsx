@@ -78,6 +78,7 @@ export const styles =  StyleSheet.create({
       alignItems:'center',
       justifyContent:'center',
       backgroundColor:'#49484143',
+      marginLeft:1
       
   },
 
