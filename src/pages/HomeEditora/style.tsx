@@ -55,14 +55,10 @@ export const styles =  StyleSheet.create({
       fontSize: 22
     },
     button: {
-      borderRadius: 0,
       marginLeft: 0,
-      marginRight: 0,
-      marginBottom: 0,
-      height:50,
-      width:50,
+      height:45,
+      width:45,
       backgroundColor:'#494841fc',
-      justifyContent:'center',
     },
     containerGlobal: {
       height:400,
@@ -94,8 +90,6 @@ export const styles =  StyleSheet.create({
       padding: 0,
       height:220,
       width:150,
-      alignItems: 'center',
-      justifyContent:'center',
   },
 
   mainText:{

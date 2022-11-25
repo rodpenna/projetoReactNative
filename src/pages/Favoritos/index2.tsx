@@ -72,7 +72,7 @@ const Favorito = ({route,navigation}) => {
     }
   
   const renderItem = ({ item }) => {
-    const backgroundColor = item.codigoLivro === selectedId ? "#665313" : "#EACE73";
+    const backgroundColor = item.codigoLivro === selectedId ? "#rgb(161, 157, 143)" : "#rgb(161, 157, 143)";
     const color = item.codigoLivro === selectedId ? 'white' : 'black';
   
     
@@ -89,12 +89,12 @@ const Favorito = ({route,navigation}) => {
     return (
       <>
         <SafeAreaView style={styles.container}>
-          <Text style={styles.title}>Favoritos</Text>
+          <Text style={styles.Favoritos}>Favoritos</Text>
          
           <View>
           
             <View style={styles.screenContainer}>
-            <Text style={styles.itens}>Itens</Text>
+            {/* <Text style={styles.itens}>Itens</Text> */}
             <Button 
             color="red"
             title="Remover Todos"
@@ -121,17 +121,19 @@ const Favorito = ({route,navigation}) => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    marginTop: StatusBar.currentHeight || 0,
+    marginTop:10
   },
   item: {
     padding: 20,
     marginVertical: 8,
-    marginHorizontal: 16,
-    flexDirection: 'row'
+    marginHorizontal: 70,
+  },
+  Favoritos:{
+    fontSize: 30,
+    marginLeft:10
   },
   title: {
-    fontSize: 32,
+    fontSize: 25,
   },
   itens: {
     marginVertical: 8,
@@ -146,9 +148,8 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   imgItem:{
-    flex:1, 
     width:200, 
-    height:200
+    height:150
   }
   
   

@@ -23,10 +23,10 @@ export const styles =  StyleSheet.create({
       height:500,
       width:250,
       alignItems:'center',
-      justifyContent:'center',
       backgroundColor:'#49484143',
       paddingTop:10,
-      marginTop:100
+      marginTop:150,
+      marginRight:29
       
   },
 
@@ -40,8 +40,7 @@ export const styles =  StyleSheet.create({
       padding: 0,
       height:220,
       width:150,
-      alignItems: 'center',
-      justifyContent:'center',
+      marginLeft:18
   },
 
   mainText:{
@@ -67,12 +66,11 @@ export const styles =  StyleSheet.create({
 
   button:{
       borderRadius: 0,
-      marginLeft: 0,
+      marginLeft: 20,
       marginRight: 0,
       marginBottom: 0,
       height:50,
       width:50,
       backgroundColor:'#494841fc',
-      justifyContent:'center',
   },
 });

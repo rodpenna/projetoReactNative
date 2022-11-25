@@ -82,7 +82,7 @@ export const styles =  StyleSheet.create({
       fontWeight: 'bold'
     },
     title: {
-      fontSize: 14,
+      fontSize: 16,
       flex:.8
     },
     btnItem:{

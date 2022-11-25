@@ -139,7 +139,6 @@ const HomeLivro = ({route,navigation}) => {
                 <Icon
                     name="add-shopping-cart"
                     color='#fff'
-                    iconStyle={{ marginRight: 10 }}
                 />
                 }
                 buttonStyle={styles.button}
@@ -156,7 +155,6 @@ const HomeLivro = ({route,navigation}) => {
                 <Icon
                   name="favorite"
                   color='#fff'
-                  iconStyle={{ marginRight: 10 }}
                 />
                 }
                 buttonStyle={styles.button}

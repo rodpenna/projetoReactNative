@@ -138,13 +138,12 @@ const HomeEditora = ({route,navigation}) => {
                     </Text>
 
                     <SafeAreaView style={styles.containerGlobalButton}>
-                      <SafeAreaView style={styles.containerButton}>
+                      <SafeAreaView >
                           <Button
                               icon={
                               <Icon
                                   name="info"
                                   color='#fff'
-                                  iconStyle={{ marginRight: 10 }}
                               />
                               }
                               buttonStyle={styles.button}
@@ -157,13 +156,12 @@ const HomeEditora = ({route,navigation}) => {
                               }}
                         />
                       </SafeAreaView>
-                      <SafeAreaView style={{ flex: 1,  }}>
+                      <SafeAreaView >
                         <Button
                           icon={
                           <Icon
                               name="add-shopping-cart"
                               color='#fff'
-                              iconStyle={{ marginRight: 10 }}
                           />
                           }
                           buttonStyle={styles.button}
@@ -173,13 +171,12 @@ const HomeEditora = ({route,navigation}) => {
                           }}
                         />
                         </SafeAreaView>
-                        <SafeAreaView style={{ flex: 1, }}>
+                        <SafeAreaView >
                           <Button
                             icon={
                             <Icon
                                 name="favorite"
                                 color='#fff'
-                                iconStyle={{ marginRight: 10 }}
                             />
                             }
                             buttonStyle={styles.button}
