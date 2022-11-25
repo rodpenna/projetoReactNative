@@ -51,8 +51,8 @@ export const styles =  StyleSheet.create({
       fontSize: 18
     },
     title: {
-      color: '#fff',
-      fontSize: 22
+      color: '#211f1f',
+      fontSize: 32
     },
     button: {
       height: 50,

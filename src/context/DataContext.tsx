@@ -8,6 +8,18 @@ export const DataContext = createContext({})
 
 export const DataProvider = ({children}) => {
     const [dadosUsuario, setDadosUsuario] = useState<DadosUsuarioType>();
+    const [totalBadge,setTotalBadge] = useState(0)
+    
+    const badgeCounter = (signal:any) =>{
+        if (signal===0){
+            setTotalBadge(0)
+        }else{
+            let total = totalBadge
+            setTotalBadge(total+1)
+        }
+   
+
+    }
     
     const armazenarDadosUsuario = (jwt:any) =>{
         var tokenDecodificado:any = jwt_decode(jwt);
@@ -27,7 +39,9 @@ export const DataProvider = ({children}) => {
     return (
         <DataContext.Provider value={{
             dadosUsuario,
-            armazenarDadosUsuario
+            armazenarDadosUsuario,
+            badgeCounter,
+            totalBadge
         }}>
             {children}
         </DataContext.Provider>

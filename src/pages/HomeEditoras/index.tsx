@@ -19,7 +19,6 @@ import {DataContext} from '../../context/DataContext';
 import {DadosEditoraType} from '../../models/DadosEditoraType';
 import {DadosLivrosType} from '../../models/DadosLivrosType';
 
-
 import {styles} from './style';
 
 const Item = ({item, onPress}) => (
@@ -35,7 +34,7 @@ const Item = ({item, onPress}) => (
 
 const HomeEditoras = ({navigation}) => {
   // ---------Use States-----------
-const {dadosUsuario} = useContext(DataContext);
+  const {dadosUsuario,badgeCounter} = useContext(DataContext);
   const [dadosEditora, setDadosEditora] = useState<DadosEditoraType[]>([]);
   const [pesquisa, setPesquisa] = useState(null);
   const [selectedId, setSelectedId] = useState(null);
@@ -65,51 +64,51 @@ const {dadosUsuario} = useContext(DataContext);
   }, []);
 
   //----------------------
-//   const navigateHomeEditora = (id: any) => {
-//     setSelectedId(id);    
-//     navigation.navigate('HomeEditora', {
-//       editoraId: id,
-//     });
-//   };
+  //   const navigateHomeEditora = (id: any) => {
+  //     setSelectedId(id);
+  //     navigation.navigate('HomeEditora', {
+  //       editoraId: id,
+  //     });
+  //   };
 
   const renderItem = ({item}) => {
     const idEditora = item.codigoEditora;
     return (
-        <Item
-          item={item}
-          onPress={() => {
-            setSelectedId(item.codigoEditora);
-            navigation.navigate('HomeEditora', {id: idEditora});
-          }}
-        />
-      );
-    };
+      <Item
+        item={item}
+        onPress={() => {
+          setSelectedId(item.codigoEditora);
+          navigation.navigate('HomeEditora', {id: idEditora});
+        }}
+      />
+    );
+  };
   //-----------------------
 
   return (
     <>
-    <SafeAreaView style={styles.container}>
-      <SafeAreaView>
-        <TextInput
-          style={styles.input}
-          onChangeText={e => {
-            onChangeText(e);
-          }}
-          value={pesquisa}
-          placeholder={'Pesquisar'}
-        />
-      </SafeAreaView>
+      <SafeAreaView style={styles.container}>
+        <SafeAreaView>
+          <TextInput
+            style={styles.input}
+            onChangeText={e => {
+              onChangeText(e);
+            }}
+            value={pesquisa}
+            placeholder={'Pesquisar'}
+          />
+        </SafeAreaView>
 
-      <View style={styles.container2}>
-        <FlatList 
-        numColumns={2}       
-          data={dadosEditora}
-          renderItem={renderItem}
-          keyExtractor={item => item.codigoEditora}
-          extraData={selectedId}
-          horizontal={false}
-        />
-      </View>
+        <View style={styles.container2}>
+          <FlatList
+            numColumns={2}
+            data={dadosEditora}
+            renderItem={renderItem}
+            keyExtractor={item => item.codigoEditora}
+            extraData={selectedId}
+            horizontal={false}
+          />
+        </View>
       </SafeAreaView>
     </>
   );

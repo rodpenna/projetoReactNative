@@ -55,12 +55,69 @@ export const styles =  StyleSheet.create({
       fontSize: 22
     },
     button: {
-      height: 50,
-      borderRadius: 10,
-      backgroundColor: '#fff',
-      justifyContent: 'center',
+      borderRadius: 0,
+      marginLeft: 0,
+      marginRight: 0,
+      marginBottom: 0,
+      height:50,
+      width:50,
+      backgroundColor:'#494841fc',
+      justifyContent:'center',
+    },
+    containerGlobal: {
+      height:400,
+      width:250,
+      alignItems:'center',
+      justifyContent:'center',
+      marginLeft: Dimensions.get('window').width*0.2,
+      marginBottom:30,
+      marginTop:20,
+      
+      
+  },
+
+  containerCard:{
+      height:400,
+      width:250,
+      alignItems:'center',
+      justifyContent:'center',
+      backgroundColor:'#49484143',
+      
+  },
+
+  mainTitle:{
+      fontSize:18,
+      color:'#000000'
+  },
+
+  cardImage:{
+      padding: 0,
+      height:220,
+      width:150,
       alignItems: 'center',
-      width: 300,
-      marginTop: 20
-    }
+      justifyContent:'center',
+  },
+
+  mainText:{
+      fontSize:18,
+      color:'#000000',
+      marginBottom: 10 ,
+      marginTop: 10 ,
+      
+  },
+
+  containerGlobalButton:{
+      flex: 1,
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: "space-between",
+      marginLeft:0,
+  },
+
+  containerButton:{
+      flex: 1,
+      justifyContent:'center',
+  },
+
+
 });
