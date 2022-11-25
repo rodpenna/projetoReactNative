@@ -18,7 +18,7 @@ import Cart from './pages/Cart/index2';
 // import Cart from './pages/Cart';
 import Favorito from './pages/Favoritos/index2';
 // import Favorito from './pages/Favoritos';
-import Pesquisa from './pages/Pesquisa';
+
 
 import { storeLocalData, incrementLocalData, retrieveLocalData, removeLocalData,clearStorage } from './services/LocalStorageService';
 import Ionicons from 'react-native-vector-icons/Ionicons';

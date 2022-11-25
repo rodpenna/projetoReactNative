@@ -10,12 +10,15 @@ export const DataProvider = ({children}) => {
     const [dadosUsuario, setDadosUsuario] = useState<DadosUsuarioType>();
     const [totalBadge,setTotalBadge] = useState(0)
     
-    const badgeCounter = (signal:any) =>{
+    const badgeCounter = (signal=1) =>{
         if (signal===0){
             setTotalBadge(0)
-        }else{
+        }else if(signal===1){
             let total = totalBadge
             setTotalBadge(total+1)
+        }else{
+            let total = totalBadge
+            setTotalBadge(total-1)   
         }
    
 

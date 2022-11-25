@@ -15,9 +15,8 @@ import AxiosInstance from '../../api/AxiosInstance';
 
 import { Card, Button, Icon } from '@rneui/themed';
 import { DataContext } from '../../context/DataContext';
-import { DadosLivroType } from '../../models/DadosLivroType';
-import {DadosLivrosType} from '../../models/DadosLivrosType';
-import { storeLocalData, incrementLocalData, retrieveLocalData, removeLocalData,clearStorage } from '../../services/LocalStorageService';
+import {DadosLivroType} from '../../models/DadosLivroType';
+import { storeLocalData, incrementLocalData, retrieveLocalData, removeLocalData,clearStorage,removeFromFavoritosByKeyAndValue } from '../../services/LocalStorageService';
 
 const Item = ({ item, onPress, backgroundColor, textColor }) => (
   <TouchableOpacity onPress={onPress} style={[styles.item, backgroundColor]}>
@@ -30,19 +29,21 @@ const Item = ({ item, onPress, backgroundColor, textColor }) => (
 
 const Favorito = ({route,navigation}) => {
   const {dadosUsuario,badgeCounter} = useContext(DataContext)
-  const [dadosFavoritos, setDadosFavoritos] = useState<DadosLivrosType[]>([]);
+
   const [selectedId, setSelectedId] = useState(null);
-  const [favoritos,setFavoritos] =  useState<DadosLivrosType[]>([]);
+  const [favoritos,setFavoritos] =  useState<DadosLivroType[]>([]);
 
   useEffect(() => {
-    // getAllFavoritos();
     getStorageFav();
-    // const data = retrieveLocalData('livroFav')
-    //    setFavoritos(data)
-    // console.log('oi',data);
-     
-      
   },[favoritos]);
+
+  // useEffect(() => {
+  
+  //   getStorageFav();
+   
+      
+  // },[]);
+
 
   // const getAllFavoritos = async () =>{
   //   AxiosInstance.get(
@@ -63,29 +64,35 @@ const Favorito = ({route,navigation}) => {
   //   });
   // }
 
-    const getStorageFav = async () => {
-     const data = await retrieveLocalData('livroFav')
-     if(data !== undefined){
-      let teste=JSON.parse(data)      
-      setFavoritos(teste) 
-     }
-    }
-  
+  const getStorageFav = async () => {
+    let data = await retrieveLocalData('livroFav')
+    setFavoritos(data ? JSON.parse(data):[]) 
+   }
+
+
   const renderItem = ({ item }) => {
     const backgroundColor = item.codigoLivro === selectedId ? "#665313" : "#EACE73";
     const color = item.codigoLivro === selectedId ? 'white' : 'black';
-  
+  const id = item.codigoLivro
     
     return (
-      <Item
+      <><Item
         item={item}
         onPress={() => setSelectedId(item.codigoLivro)}
         backgroundColor={{ backgroundColor }}
-        textColor={{ color }}
-      />
+        textColor={{ color }} />
+        <Button
+          onPress={()=>{
+            badgeCounter(-1)
+            removeItemFavorito(item.codigoLivro)}}
+        >Excluir</Button></>
     );
   };
 
+    const removeItemFavorito= (id:any) =>{
+        removeFromFavoritosByKeyAndValue('livroFav',id)
+    }
+  
     return (
       <>
         <SafeAreaView style={styles.container}>
@@ -101,10 +108,20 @@ const Favorito = ({route,navigation}) => {
             onPress={() => {
               removeLocalData('livroFav')
               badgeCounter(0)
+              console.log("limpo ?",favoritos);
               
             }}
           />
+
+
           </View>
+          <Button 
+            color="red"
+            title="Atualzar"
+            onPress={() => {
+              getStorageFav()
+            }}
+          />
         </View>
         <FlatList
           data={favoritos}

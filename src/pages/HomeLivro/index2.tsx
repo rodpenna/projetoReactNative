@@ -71,7 +71,6 @@ const HomeLivro = ({route,navigation}) => {
     const addFavorite = (livro:any) => {
       //console.log(`Favoritos: Livro selecionado: ${JSON.stringify(livro)}`);
       incrementLocalData('livroFav', livro);
-      console.log('oi',livro);
       
     }
 
@@ -85,7 +84,7 @@ const HomeLivro = ({route,navigation}) => {
 
     function addCarrinho (livro:any){
       
-      incrementLocalData('Carrinho', livro )
+      incrementLocalData('itemCart', livro )
 
     }
 
@@ -145,7 +144,7 @@ const HomeLivro = ({route,navigation}) => {
                 buttonStyle={styles.button}
                 title=""
                 onPress={() =>{ 
-                console.log("Adicionado carrinho")
+                  addCarrinho(dadosLivro)
                 }}
               />
             </SafeAreaView>

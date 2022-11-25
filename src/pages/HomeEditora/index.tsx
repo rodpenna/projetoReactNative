@@ -87,8 +87,6 @@ const HomeEditora = ({route,navigation}) => {
   const addFavorite = (livro:any) => {
     //console.log(`Favoritos: Livro selecionado: ${JSON.stringify(livro)}`);
     incrementLocalData('livroFav', livro);
-    console.log('oi',livro);
-    
   }
   
   //-------------------
