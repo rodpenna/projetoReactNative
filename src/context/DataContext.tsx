@@ -24,10 +24,46 @@ export const DataProvider = ({children}) => {
         })
     }
 
+    //-------------------
+    //Badge Favorito
+    const [totalBadge,setTotalBadge] = useState(0)      
+    
+    const badgeCounter = (signal:any) =>{
+        if (signal===0){
+            setTotalBadge(0)
+        }else{
+            let total = totalBadge
+            setTotalBadge(total+1)
+
+        }
+
+    }
+
+    //--------------------------
+    //Carrinho
+    const [totalCarrinho,setTotalCarrinho] = useState(0)      
+    
+    const badgeCarrinho = (signal:any) =>{
+        if (signal===0){
+            setTotalCarrinho(0)
+        }else{
+            let total = totalBadge
+            setTotalCarrinho(total+1)
+        }
+    }
+
+
+
+
     return (
         <DataContext.Provider value={{
             dadosUsuario,
-            armazenarDadosUsuario
+            armazenarDadosUsuario,
+            badgeCounter,
+            totalBadge,
+            totalCarrinho,
+            badgeCarrinho
+
         }}>
             {children}
         </DataContext.Provider>

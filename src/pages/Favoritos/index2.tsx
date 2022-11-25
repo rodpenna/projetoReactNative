@@ -15,8 +15,8 @@ import AxiosInstance from '../../api/AxiosInstance';
 
 import { Card, Button, Icon } from '@rneui/themed';
 import { DataContext } from '../../context/DataContext';
-import { DadosLivroType } from '../../models/DadosLivroType';
-import {DadosLivrosType} from '../../models/DadosLivrosType';
+import {DadosLivroType} from '../../models/DadosLivroType';
+import { storeLocalData, incrementLocalData, retrieveLocalData, removeLocalData,clearStorage } from '../../services/LocalStorageService';
 
 const Item = ({ item, onPress, backgroundColor, textColor }) => (
   <TouchableOpacity onPress={onPress} style={[styles.item, backgroundColor]}>
@@ -26,39 +26,36 @@ const Item = ({ item, onPress, backgroundColor, textColor }) => (
 );
 
 
+
 const Favorito = ({route,navigation}) => {
-  const {dadosUsuario} = useContext(DataContext);
-  const [dadosFavoritos, setDadosFavoritos] = useState<DadosLivrosType[]>([]);
+  const {dadosUsuario,badgeCounter} = useContext(DataContext)
+
   const [selectedId, setSelectedId] = useState(null);
+  const [favoritos,setFavoritos] =  useState<DadosLivroType[]>([]);
 
   useEffect(() => {
-    getAllFavoritos();
+ 
+    getStorageFav();
+
+     
+      
   },[]);
 
-  const getAllFavoritos = async () =>{
-    AxiosInstance.get(
-      '/livros',
-      {headers: {"Authorization": `Bearer ${dadosUsuario?.token}`}}
-        ).then(resultado =>{
-            console.log('Dados do livro: ' +JSON.stringify(resultado.data));
-            setDadosFavoritos(resultado.data)
-        }).catch((error) => {
-            console.log('Ocorreu um erro ao recuperar os dados das editoras' +JSON.stringify(error));
-        })
-  }
 
-  // const navigateToFavoritosHome = (id:any) =>{
-  //   setSelectedId(id);
-  //   navigation.navigate('HomeFavortosScreen',{
-  //     edioraId: id,
-  //   });
-  // }
 
+    const getStorageFav = async () => {
+     let data = await retrieveLocalData('favLivro')
+     if(data !== undefined){
+      let teste=JSON.parse(data)  
+      console.log(teste)    
+      setFavoritos(teste) 
+     }
+    }
   
   const renderItem = ({ item }) => {
     const backgroundColor = item.codigoLivro === selectedId ? "#665313" : "#EACE73";
     const color = item.codigoLivro === selectedId ? 'white' : 'black';
-
+  
     return (
       <Item
         item={item}
@@ -73,29 +70,35 @@ const Favorito = ({route,navigation}) => {
       <>
         <SafeAreaView style={styles.container}>
           <Text style={styles.title}>Favoritos</Text>
-         
           <View>
-          
             <View style={styles.screenContainer}>
-            <Text style={styles.itens}>Itens</Text>
-            <Button 
-            color="red"
-            title="Remover livro"
-            onPress={() => Alert.alert('Removido com sucesso!')}
-          />
+              <Text style={styles.itens}>Itens</Text>
+              <Button 
+                color="red"
+                title="Remover Todos"
+                onPress={() => {
+                  removeLocalData('favLivro')
+                  badgeCounter(0)
+                }}
+              />
+            </View>
+              <Button 
+                color="blue"
+                title="Atualzar"
+                onPress={() => {
+                  getStorageFav()
+                }}
+              />
           </View>
-        </View>
-        <FlatList
-          data={dadosFavoritos}
-          renderItem={renderItem}
-          keyExtractor={(item) => item.codigoLivro}
-          extraData={selectedId}
-        />
-          </SafeAreaView>
-      
+          <FlatList
+            data={favoritos}
+            renderItem={renderItem}
+            keyExtractor={(favoritos:any) => (`fav_list${favoritos.codigoLivro}`)}
+            extraData={selectedId}
+          />
+        </SafeAreaView>
       </>
     );
-
 }
 
 const styles = StyleSheet.create({
@@ -125,9 +128,9 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   imgItem:{
-    flex:3, 
-    width:140, 
-    height:140
+    flex:1, 
+    width:200, 
+    height:200
   }
   
   

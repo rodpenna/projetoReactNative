@@ -23,12 +23,9 @@ const HomeLivro = ({route,navigation}) => {
 
     //------------------------
     //Parametros pela rota
-
     const {id} = route.params
 
-
-    const {dadosUsuario} = useContext(DataContext)
-
+    const {dadosUsuario,badgeCounter,badgeCarrinho} = useContext(DataContext)
 
     //----------------------
     //Barra Pesquisa
@@ -72,6 +69,7 @@ const HomeLivro = ({route,navigation}) => {
     function addFavorito (livro:any){
 
       incrementLocalData('favLivro',livro)
+      badgeCounter()
 
     }
 
@@ -86,6 +84,7 @@ const HomeLivro = ({route,navigation}) => {
     function addCarrinho (livro:any){
       
       incrementLocalData('Carrinho', livro )
+      badgeCarrinho()
 
     }
 
@@ -146,6 +145,7 @@ const HomeLivro = ({route,navigation}) => {
                 title=""
                 onPress={() =>{ 
                 console.log("Adicionado carrinho")
+                addCarrinho(dadosLivro)
                 }}
               />
             </SafeAreaView>
@@ -162,7 +162,7 @@ const HomeLivro = ({route,navigation}) => {
                 buttonStyle={styles.button}
                 onPress={() =>{ 
                 console.log("Adicionado aos favoritos")
-                // addFavorite(dadosLivro?.livro)
+                addFavorito(dadosLivro)
                 }}
               />
             </SafeAreaView>

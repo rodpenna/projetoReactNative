@@ -1,24 +1,18 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-import { DataProvider } from './context/DataContext';
+import { DataContext, DataProvider } from './context/DataContext';
 
 import Login from './pages/Login/'
-// import Home from './pages/Home/'
 import Home from './pages/Home/index2'
-// import HomeEditoras from './pages/HomeEditoras'
 import HomeEditoras from './pages/HomeEditoras'
 import HomeEditora from './pages/HomeEditora';
-// import HomeLivro from './pages/HomeLivro';
 import HomeLivro from './pages/HomeLivro/index2';
 import Cart from './pages/Cart/index2';
-// import Cart from './pages/Cart';
 import Favorito from './pages/Favoritos/index2';
-// import Favorito from './pages/Favoritos';
-import Pesquisa from './pages/Pesquisa';
 
 
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -28,6 +22,10 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 const TabBottomNavigation = createBottomTabNavigator();
 
 const BottomNavigator = () => {
+
+  const {totalBadge,totalCarrinho} = useContext(DataContext)
+
+
   return (
     <TabBottomNavigation.Navigator
       screenOptions={{
@@ -61,7 +59,8 @@ const BottomNavigator = () => {
         component={Favorito}
         options={{
           title:'',
-          tabBarIcon: ({focused})=> (<Ionicons name='heart' color={focused?"#F4D05A":"#473b14"} size={30}/>)
+          tabBarIcon: ({focused})=> (<Ionicons name='heart' color={focused?"#F4D05A":"#473b14"} size={30}/>),
+          tabBarBadge: totalBadge ? totalBadge : undefined
         }}
       />
 
@@ -70,7 +69,8 @@ const BottomNavigator = () => {
         component={Cart}
         options={{
           title:'',
-          tabBarIcon: ({focused})=> (<Ionicons name='cart' color={focused?"#F4D05A":"#473b14"} size={30}/>)
+          tabBarIcon: ({focused})=> (<Ionicons name='cart' color={focused?"#F4D05A":"#473b14"} size={30}/>),
+          tabBarBadge: totalCarrinho ? totalCarrinho : undefined
         }}
       />
     </TabBottomNavigation.Navigator>

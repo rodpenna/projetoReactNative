@@ -11,10 +11,9 @@ import { SearchBar,PricingCard,lightColors,Text, Card, Button, Icon  } from '@rn
 import { DadosLivroType } from '../../models/DadosLivroType';
 
 import AxiosInstance from '../../api/AxiosInstance';
-
 import { DataContext } from '../../context/DataContext';
 import { DadosEditoraType } from '../../models/DadosEditoraType';
-import CardLayout from '../../components/Card/Card';
+import { incrementLocalData } from '../../services/LocalStorageService';
 
 // import CardFav from '../../components/Card/Card';
 
@@ -25,7 +24,7 @@ const HomeEditora = ({route,navigation}) => {
 
   const {id} = route.params
   
-  const {dadosUsuario} = useContext(DataContext)
+  const {dadosUsuario,badgeCounter,badgeCarrinho} = useContext(DataContext)
     
   //----------------------
   //Barra Pesquisa
@@ -80,7 +79,25 @@ const HomeEditora = ({route,navigation}) => {
     
   },[])
   //-------------------
+  //Favorito
 
+  function addFavorito (livro:any){
+
+    incrementLocalData('favLivro',livro)
+    badgeCounter()
+
+  }
+
+
+  //---------------------
+  function addCarrinho (livro:any){
+      
+    incrementLocalData('Carrinho', livro )
+    badgeCarrinho()
+
+  }
+
+  //-----------------------
 
   return (
   <>
@@ -158,6 +175,7 @@ const HomeEditora = ({route,navigation}) => {
                           title=""
                           onPress={() =>{ 
                           console.log("Adicionado carrinho")
+                          addCarrinho(o)
                           }}
                         />
                         </SafeAreaView>
@@ -165,15 +183,14 @@ const HomeEditora = ({route,navigation}) => {
                           <Button
                             icon={
                             <Icon
-                                name="favorite"
-                                color='#fff'
-                                iconStyle={{ marginRight: 10 }}
+                              name="favorite"
+                              color='#fff'
+                              iconStyle={{ marginRight: 10 }}
                             />
                             }
                             buttonStyle={styles.button}
                             onPress={() =>{ 
-                            console.log("Adicionado aos favoritos")
-                            // addFavorite(props.livro)
+                              addFavorito(o)
                             }}
                           />
                         </SafeAreaView>
