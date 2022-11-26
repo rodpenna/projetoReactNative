@@ -37,32 +37,6 @@ const Favorito = ({route,navigation}) => {
     getStorageFav();
   },[favoritos]);
 
-  // useEffect(() => {
-  
-  //   getStorageFav();
-   
-      
-  // },[]);
-
-
-  // const getAllFavoritos = async () =>{
-  //   AxiosInstance.get(
-  //     '/livros',
-  //     {headers: {"Authorization": `Bearer ${dadosUsuario?.token}`}}
-  //       ).then(resultado =>{
-  //           console.log('Dados do livro: ' +JSON.stringify(resultado.data));
-  //           setDadosFavoritos(resultado.data)
-  //       }).catch((error) => {
-  //           console.log('Ocorreu um erro ao recuperar os dados das editoras' +JSON.stringify(error));
-  //       })
-  // }
-
-  // const navigateToFavoritosHome = (id:any) =>{
-  //   setSelectedId(id);
-  //   navigation.navigate('HomeFavortosScreen',{
-  //     edioraId: id,
-  //   });
-  // }
 
   const getStorageFav = async () => {
     let data = await retrieveLocalData('livroFav')

@@ -91,6 +91,10 @@ const HomeEditora = ({route,navigation}) => {
   
   //-------------------
 
+  const addCart = (livro:any) => {
+    //console.log(`Favoritos: Livro selecionado: ${JSON.stringify(livro)}`);
+    incrementLocalData('itemCart', livro);
+  }
 
   return (
   <>
@@ -98,10 +102,8 @@ const HomeEditora = ({route,navigation}) => {
     <SafeAreaView>
       <SearchBar
         platform="default"
-        onChangeText={newVal => onChangeSearch(newVal)}
-        placeholder="Digite o nome do livro"
+        placeholder="Digite aaqui"
         placeholderTextColor="#888"
-        value={pesquisa}
       />
     </SafeAreaView>
 
@@ -167,8 +169,9 @@ const HomeEditora = ({route,navigation}) => {
                           buttonStyle={styles.button}
                           title=""
                           onPress={() =>{ 
-                          console.log("Adicionado carrinho")
+                            addCart(o)
                           }}
+                        
                         />
                         </SafeAreaView>
                         <SafeAreaView style={{ flex: 1, }}>
