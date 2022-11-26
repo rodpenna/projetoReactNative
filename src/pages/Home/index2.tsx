@@ -17,6 +17,7 @@ import {DadosEditoraType} from '../../models/DadosEditoraType';
 import {Text, Card, Button, Icon} from '@rneui/themed';
 
 import {DadosLivroType} from '../../models/DadosLivroType';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 
 const Item = ({item, onPress, backgroundColor, textColor}) => (
@@ -113,7 +114,7 @@ useEffect(() => {
             <Card.Title>{nomeLivro}</Card.Title>
             <Card.Divider />
             <Card.Image
-              style={{ padding: 0 }}
+              style={{ height:200 ,resizeMode:'center' }}
               source={{
                 uri:
                   urlImagem,
@@ -161,11 +162,14 @@ useEffect(() => {
     <>
       <ScrollView>
         <SafeAreaView style={styles.container}>
-          <Text style={styles.title}>Editoras</Text>
+          <Text style={styles.title}>
+          <Ionicons name='book' size={30} />
+            Editoras
+            </Text>
           <FlatList
             data={dadosEditora}
             renderItem={renderItem}
-            keyExtractor={(dadosEditora: any) => dadosEditora.codigoEditora}
+            keyExtractor={(dadosEditora: any) => (`home_${dadosEditora.codigoEditora}`)}
             extraData={selectedId}
             horizontal={true}
             scrollEnabled
@@ -178,7 +182,7 @@ useEffect(() => {
         </SafeAreaView>
 
         <SafeAreaView style={styles.container2}>
-          <Text style={styles.title}>Recentes</Text>
+          <Text style={styles.title}>Lançamentos</Text>
           <SafeAreaView >
             <FlatList
               data={livrosRecentes}
@@ -204,10 +208,11 @@ useEffect(() => {
             <Card.Title>{destaque?.nomeLivro}</Card.Title>
             <Card.Divider />
             <Card.Image
-              style={{padding: 0}}
+              style={{ height:200 ,resizeMode:'center' }} 
               source={{
                 uri: destaque?.urlImagem
               }}
+              
             />
             <SafeAreaView>
               <SafeAreaView>

@@ -22,13 +22,14 @@ import Favorito from './pages/Favoritos/index2';
 
 import { storeLocalData, incrementLocalData, retrieveLocalData, removeLocalData,clearStorage } from './services/LocalStorageService';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-
+import { LogBox } from "react-native";
 
 
 const TabBottomNavigation = createBottomTabNavigator();
 
 const BottomNavigator = () => {
-  const {totalBadge} = useContext(DataContext)
+  LogBox.ignoreAllLogs();
+  const {totalBadge,totalCarrinho} = useContext(DataContext)
   return (
     <TabBottomNavigation.Navigator
       screenOptions={{
@@ -73,7 +74,8 @@ const BottomNavigator = () => {
         component={Cart}
         options={{
           title:'',
-          tabBarIcon: ({focused})=> (<Ionicons name='cart' color={focused?"#F4D05A":"#473b14"} size={30}/>)
+          tabBarIcon: ({focused})=> (<Ionicons name='cart' color={focused?"#F4D05A":"#473b14"} size={30}/>),
+          tabBarBadge: totalCarrinho ? totalCarrinho : undefined
         }}
       />
     </TabBottomNavigation.Navigator>
@@ -119,7 +121,7 @@ const App = () => {
             name="HomeEditora" 
             component={HomeEditora} 
             options={{
-              title: '',
+              title: 'Livros',
               headerStyle: {
                 backgroundColor: '#504e2e',
               },
@@ -130,7 +132,7 @@ const App = () => {
             name="HomeLivro" 
             component={HomeLivro} 
             options={{
-              title: '',
+              title: 'Livro',
               headerStyle: {
                 backgroundColor: '#504e2e',
               },
@@ -141,7 +143,7 @@ const App = () => {
             name="HomeEditoras" 
             component={HomeEditoras} 
             options={{
-              title: '',
+              title: 'Editoras',
               headerStyle: {
                 backgroundColor: '#504e2e',
               },

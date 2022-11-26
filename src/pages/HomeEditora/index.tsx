@@ -26,7 +26,7 @@ const HomeEditora = ({route,navigation}) => {
 
   const {id} = route.params
   
-  const {dadosUsuario,badgeCounter} = useContext(DataContext)
+  const {dadosUsuario,badgeCounter,carrinhoCounter} = useContext(DataContext)
     
   //----------------------
   //Barra Pesquisa
@@ -102,7 +102,7 @@ const HomeEditora = ({route,navigation}) => {
     <SafeAreaView>
       <SearchBar
         platform="default"
-        placeholder="Digite aaqui"
+        placeholder="Digite um Livro"
         placeholderTextColor="#888"
       />
     </SafeAreaView>
@@ -110,12 +110,14 @@ const HomeEditora = ({route,navigation}) => {
     <ScrollView>
       <SafeAreaView>
             {
-            listaLivro.map((o)=>{
+            listaLivro.map((o,i)=>{
               return(
-              <>
-                <SafeAreaView style={styles.containerGlobal}>
+              
+                <SafeAreaView style={styles.containerGlobal}
+
+                >
                   <Card 
-                    key={`grid_editora_livro${o.codigoLivro}`} 
+                    key={`editora_livro_t${i}`} 
                     containerStyle={styles.containerCard}
                     >
                     <Card.Title
@@ -134,9 +136,9 @@ const HomeEditora = ({route,navigation}) => {
                     />
                     <Text 
                       style={styles.mainText}>
-                      Editora: {o.editoraDTO?.nomeEditora}
+                      Editora: {dadosEditora?.nomeEditora}
                     </Text>
-
+                  
                     <SafeAreaView style={styles.containerGlobalButton}>
                       <SafeAreaView style={styles.containerButton}>
                           <Button
@@ -170,6 +172,7 @@ const HomeEditora = ({route,navigation}) => {
                           title=""
                           onPress={() =>{ 
                             addCart(o)
+                            carrinhoCounter(1)
                           }}
                         
                         />
@@ -196,7 +199,7 @@ const HomeEditora = ({route,navigation}) => {
                   </SafeAreaView>
 
 
-              </>
+           
               )
             }
             )

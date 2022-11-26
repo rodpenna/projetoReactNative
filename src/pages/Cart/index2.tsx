@@ -18,6 +18,7 @@ import { DataContext } from '../../context/DataContext';
 import {DadosLivroType} from '../../models/DadosLivroType';
 import { storeLocalData, incrementLocalData, retrieveLocalData, removeLocalData,clearStorage,removeFromFavoritosByKeyAndValue } from '../../services/LocalStorageService';
 import { RadioButton } from 'react-native-paper';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 // import { styles } from './style';
 
@@ -29,38 +30,14 @@ const Item = ({ item, onPress, backgroundColor, textColor }) => (
 );
 
 
-
-const Separator = () => {
-  return <View style={styles.separator} />;
-};
-
-const Selecionar = () => {
-  const [checked, setChecked] = React.useState('first');
-
-  return (
-    <View style={styles.Selecionar}>
-      <RadioButton
-        value="first"
-        status={checked === 'first' ? 'checked' : 'unchecked'}
-        onPress={() => setChecked('first')}
-      />
-      <RadioButton
-        value="second"
-        status={checked === 'second' ? 'checked' : 'unchecked'}
-        onPress={() => setChecked('second')}
-      />
-    </View>
-  );
-};
-
 const Cart = ({route, navigation}) => {
   const [itensCarrinho, setItensCarrinho] = useState<DadosLivroType[]>([]);
   const [selectedId, setSelectedId] = useState(null);
-  const {dadosUsuario,badgeCounter} = useContext(DataContext)
+  const {dadosUsuario,badgeCounter,carrinhoCounter} = useContext(DataContext)
 
   useEffect(() => {
     getStoragecart();
-  }, []);
+  }, [itensCarrinho]);
 
   const getStoragecart = async () => {
     let data = await retrieveLocalData('itemCart');
@@ -80,7 +57,7 @@ const Cart = ({route, navigation}) => {
         textColor={{ color }} />
         <Button
           onPress={()=>{
-            badgeCounter(-1)
+            carrinhoCounter(-1)
             removeItemCart(item.codigoLivro)}}
         >Excluir</Button></>
     );
@@ -93,18 +70,20 @@ const Cart = ({route, navigation}) => {
     return (
       <>
         <SafeAreaView style={styles.container}>
-          <Text style={styles.title}>Carrinho</Text>
+          <Text style={styles.title}>
+          <Ionicons name='cart' size={20}/>
+            Carrinho</Text>
          
           <View>
           
             <View style={styles.screenContainer}>
-            <Text style={styles.itens}>Itens</Text>
+            <Text style={styles.itens}>Itens: {itensCarrinho.length}</Text>
             <Button 
             color="red"
             title="Remover Todos"
             onPress={() => {
               removeLocalData('itemCart')
-              badgeCounter(0)
+              carrinhoCounter(0)
               console.log("limpo ?",itensCarrinho);
               
             }}
@@ -123,7 +102,7 @@ const Cart = ({route, navigation}) => {
         <FlatList
           data={itensCarrinho}
           renderItem={renderItem}
-          keyExtractor={(itensCarrinho:any) => itensCarrinho.codigoLivro}
+          keyExtractor={(itensCarrinho:any) => (`cart_${itensCarrinho.codigoLivro}`)}
           extraData={selectedId}
         />
           </SafeAreaView>
@@ -149,7 +128,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row'
   },
   title: {
-    fontSize: 32,
+    fontSize: 20,
   },
   itens: {
     marginVertical: 8,
@@ -165,8 +144,9 @@ const styles = StyleSheet.create({
   },
   imgItem:{
     flex:1, 
-    width:200, 
-    height:200
+    width:100, 
+    height:100,
+    
   },
   ValoPedido:{
     fontSize:30,

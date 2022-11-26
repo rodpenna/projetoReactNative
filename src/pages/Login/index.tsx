@@ -92,7 +92,7 @@ const Login = ({navigation}) => {
         <View style={styles.container}>
   
           <View style={styles.cabecalho}>
-            <Text style={styles.titulo}>Bem-Vindo</Text>
+            <Text style={styles.titulo}>Book Storage</Text>
           </View>
   
           <View style={styles.conteudo}>

@@ -39,12 +39,32 @@ export const DataProvider = ({children}) => {
         })
     }
 
+    const [totalCarrinho,setTotalCarrinho] = useState(0)
+    
+    const carrinhoCounter = (signal=1) =>{
+        if (signal===0){
+            setTotalCarrinho(0)
+        }else if(signal===1){
+            let total = totalCarrinho
+            setTotalCarrinho(total+1)
+        }else{
+            let total = totalCarrinho
+            setTotalCarrinho(total-1)   
+        }
+   
+
+    }
+
+
+
     return (
         <DataContext.Provider value={{
             dadosUsuario,
             armazenarDadosUsuario,
             badgeCounter,
-            totalBadge
+            totalBadge,
+            carrinhoCounter,
+            totalCarrinho
         }}>
             {children}
         </DataContext.Provider>

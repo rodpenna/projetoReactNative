@@ -16,7 +16,8 @@ export const styles =  StyleSheet.create({
     titulo: {
       fontSize: 30,
       fontWeight: 'bold',
-      color: '#000'
+      color: '#000',
+    
     },
     conteudo: {
       flex: 1,

@@ -62,7 +62,9 @@ export const styles =  StyleSheet.create({
       flex: 1,
       marginTop: StatusBar.currentHeight || 0,
       // alignItems:'center',
-      justifyContent:'space-around'
+      justifyContent:'space-around',
+      
+
 
     },
     item: {
@@ -74,6 +76,7 @@ export const styles =  StyleSheet.create({
       justifyContent:'center',
       flexDirection:"row",
       alignItems:'center',
+      
     },
     sectionTitle: {
       fontSize: 24,
@@ -96,6 +99,7 @@ export const styles =  StyleSheet.create({
     imgItem:{
       flex:3, 
       width:150, 
-      height:150
+      height:150,
+      backgroundColor:"#FFFF"
     }
 });

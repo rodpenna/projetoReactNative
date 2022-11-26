@@ -1,7 +1,6 @@
 import React, {useState, useEffect, useContext} from 'react';
 import {
   View,
-  Text,
   TouchableOpacity,
   FlatList,
   Image,
@@ -10,14 +9,22 @@ import {
   ScrollView,
 } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import {Button, Card, Title, Paragraph} from 'react-native-paper';
+import {
+  SearchBar,
+  PricingCard,
+  lightColors,
+  Text,
+  Card,
+  Button,
+  Icon,
+} from '@rneui/themed';
 
 import AxiosInstance from '../../api/AxiosInstance';
 
 //Importando o Contexto de Data
 import {DataContext} from '../../context/DataContext';
 import {DadosEditoraType} from '../../models/DadosEditoraType';
-import {DadosLivrosType} from '../../models/DadosLivrosType';
+import {DadosLivroType} from '../../models/DadosLivroType';
 
 import {styles} from './style';
 
@@ -34,7 +41,7 @@ const Item = ({item, onPress}) => (
 
 const HomeEditoras = ({navigation}) => {
   // ---------Use States-----------
-  const {dadosUsuario,badgeCounter} = useContext(DataContext);
+  const {dadosUsuario, badgeCounter} = useContext(DataContext);
   const [dadosEditora, setDadosEditora] = useState<DadosEditoraType[]>([]);
   const [pesquisa, setPesquisa] = useState(null);
   const [selectedId, setSelectedId] = useState(null);
@@ -89,16 +96,12 @@ const HomeEditoras = ({navigation}) => {
     <>
       <SafeAreaView style={styles.container}>
         <SafeAreaView>
-          <TextInput
-            style={styles.input}
-            onChangeText={e => {
-              onChangeText(e);
-            }}
-            value={pesquisa}
-            placeholder={'Pesquisar'}
+          <SearchBar
+            platform="default"
+            placeholder="Digite um Editora"
+            placeholderTextColor="#888"
           />
         </SafeAreaView>
-
         <View style={styles.container2}>
           <FlatList
             numColumns={2}

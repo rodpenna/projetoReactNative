@@ -17,6 +17,7 @@ import { Card, Button, Icon } from '@rneui/themed';
 import { DataContext } from '../../context/DataContext';
 import {DadosLivroType} from '../../models/DadosLivroType';
 import { storeLocalData, incrementLocalData, retrieveLocalData, removeLocalData,clearStorage,removeFromFavoritosByKeyAndValue } from '../../services/LocalStorageService';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 const Item = ({ item, onPress, backgroundColor, textColor }) => (
   <TouchableOpacity onPress={onPress} style={[styles.item, backgroundColor]}>
@@ -70,12 +71,13 @@ const Favorito = ({route,navigation}) => {
     return (
       <>
         <SafeAreaView style={styles.container}>
-          <Text style={styles.title}>Favoritos</Text>
-         
+          <Text style={styles.title}>
+          <Ionicons name='star' size={20}/>
+            Favoritos</Text>
           <View>
           
             <View style={styles.screenContainer}>
-            <Text style={styles.itens}>Itens</Text>
+            <Text style={styles.itens}>Itens : {favoritos.length}</Text>
             <Button 
             color="red"
             title="Remover Todos"
@@ -100,7 +102,7 @@ const Favorito = ({route,navigation}) => {
         <FlatList
           data={favoritos}
           renderItem={renderItem}
-          keyExtractor={(favoritos:any) => favoritos.codigoLivro}
+          keyExtractor={(favoritos:any) => (`fav_${favoritos.codigoLivro}`)}
           extraData={selectedId}
         />
           </SafeAreaView>
@@ -122,7 +124,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row'
   },
   title: {
-    fontSize: 32,
+    fontSize: 20,
+    fontWeight:'800'
   },
   itens: {
     marginVertical: 8,
@@ -138,8 +141,9 @@ const styles = StyleSheet.create({
   },
   imgItem:{
     flex:1, 
-    width:200, 
-    height:200
+    width:100, 
+    height:100,
+    
   }
   
   

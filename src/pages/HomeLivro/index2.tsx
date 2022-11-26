@@ -26,7 +26,7 @@ const HomeLivro = ({route,navigation}) => {
 
     const {id} = route.params
 
-    const {dadosUsuario,badgeCounter} = useContext(DataContext)
+    const {dadosUsuario,badgeCounter,carrinhoCounter} = useContext(DataContext)
 
 
     //----------------------
@@ -98,7 +98,7 @@ const HomeLivro = ({route,navigation}) => {
     <SafeAreaView style={styles.container}>
       <SafeAreaView style={styles.containerGlobal}>
         <Card 
-        key={`livro_destaque${dadosLivro?.codigoLivro}`} 
+        key={`livro_dest${dadosLivro?.codigoLivro}`} 
         containerStyle={styles.containerCard}
         >
           <Card.Title
@@ -144,6 +144,7 @@ const HomeLivro = ({route,navigation}) => {
                 buttonStyle={styles.button}
                 title=""
                 onPress={() =>{ 
+                  carrinhoCounter(1)
                   addCarrinho(dadosLivro)
                 }}
               />
